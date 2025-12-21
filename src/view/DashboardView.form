@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="view.DashboardView">
+  <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="841" height="467"/>
+    </constraints>
+    <properties>
+      <background color="-1"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <grid id="ef3be" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints border-constraint="West"/>
+        <properties>
+          <background color="-10453621"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <grid id="5de60" layout-manager="FlowLayout" hgap="20" vgap="20" flow-align="1">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-10453621"/>
+              <foreground color="-15108398"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="7499b" class="javax.swing.JLabel">
+                <constraints/>
+                <properties>
+                  <font name="Roboto" size="18" style="1"/>
+                  <foreground color="-1"/>
+                  <icon value="maletin24x24.png"/>
+                  <text value="BagStore"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="d9dea" layout-manager="GridLayoutManager" row-count="10" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-10453621"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <vspacer id="fe11e">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </vspacer>
+              <grid id="f3009" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-10453621"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="950da" class="javax.swing.JButton" binding="btnHome">
+                    <constraints/>
+                    <properties>
+                      <text value="Home"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="82bd2" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-10453621"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="534d" class="javax.swing.JButton" binding="btnHistory">
+                    <constraints/>
+                    <properties>
+                      <text value="Purchase History"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="6c64e" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-10453621"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="aeb65" class="javax.swing.JButton" binding="btnBags">
+                    <constraints/>
+                    <properties>
+                      <text value="Bags"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="77a6" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-10453621"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="df453" class="javax.swing.JButton" binding="btnProfile">
+                    <constraints/>
+                    <properties>
+                      <text value="User Profile"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="1ca12" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints>
+                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-10453621"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="2b102" class="javax.swing.JButton" binding="btnSelling">
+                    <constraints/>
+                    <properties>
+                      <text value="Selling List"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="c2440" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints>
+                  <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-10453621"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="d35e4" class="javax.swing.JButton" binding="btnAddProduct">
+                    <constraints/>
+                    <properties>
+                      <text value="Add Product"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="791a1" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints>
+                  <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-10453621"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="6f97e" class="javax.swing.JButton" binding="btnConfig">
+                    <constraints/>
+                    <properties>
+                      <text value="Config"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <vspacer id="ebc2">
+                <constraints>
+                  <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </vspacer>
+            </children>
+          </grid>
+        </children>
+      </grid>
+      <grid id="2f879" layout-manager="BorderLayout" hgap="5" vgap="5">
+        <constraints border-constraint="Center"/>
+        <properties>
+          <background color="-789517"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <grid id="68b13" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="2">
+            <constraints border-constraint="North"/>
+            <properties>
+              <background color="-789517"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="29b6" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+                <constraints/>
+                <properties>
+                  <background color="-1"/>
+                  <columns value="25"/>
+                  <horizontalAlignment value="2"/>
+                </properties>
+              </component>
+              <grid id="8e3a8" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="2">
+                <constraints/>
+                <properties>
+                  <background color="-789517"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="c225b" class="javax.swing.JLabel" binding="lblImgProfile">
+                    <constraints/>
+                    <properties>
+                      <background color="-789517"/>
+                      <font name="Roboto" size="12" style="1"/>
+                      <foreground color="-10453621"/>
+                      <text value="ImgProfile"/>
+                    </properties>
+                  </component>
+                  <component id="81cbf" class="javax.swing.JLabel" binding="lblProfileOptiones">
+                    <constraints/>
+                    <properties>
+                      <background color="-789517"/>
+                      <font name="Roboto" size="12" style="1"/>
+                      <foreground color="-10453621"/>
+                      <text value="Profile"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+            </children>
+          </grid>
+          <grid id="3b57d" layout-manager="CardLayout" hgap="5" vgap="5">
+            <constraints border-constraint="Center"/>
+            <properties>
+              <background color="-789517"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <grid id="d03fa" layout-manager="BorderLayout" hgap="0" vgap="0">
+                <constraints>
+                  <card name="Card1"/>
+                </constraints>
+                <properties>
+                  <background color="-789517"/>
+                </properties>
+                <border type="none"/>
+                <children/>
+              </grid>
+            </children>
+          </grid>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>
