@@ -1,6 +1,7 @@
 package model.entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 
@@ -13,8 +14,9 @@ public class User {
     private String email;
     private String password;
     private LocalDate birthday;
-    private LocalDate createdAt = LocalDate.now();
-    private LocalDate updatedAt = LocalDate.now();
+    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime updatedAt = LocalDateTime.now();
+    private Roles roles;
 
     public User(String name, String lastName, String userName, String email,String password, LocalDate birthday) {
         this.name = name;
@@ -29,7 +31,7 @@ public class User {
     }
 
     public void onUpdate(){
-        this.updatedAt = LocalDate.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
     public Integer getId() {
@@ -79,21 +81,12 @@ public class User {
         this.password = password;
     }
 
-
-    public LocalDate getCreatedAt() {
-        return createdAt;
+    public Roles getRoles() {
+        return roles;
     }
 
-    public void setCreatedAt(LocalDate createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDate getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDate updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setRoles(Roles roles) {
+        this.roles = roles;
     }
 
     @Override
@@ -117,5 +110,19 @@ public class User {
         return Objects.hash(id);
     }
 
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
 
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }

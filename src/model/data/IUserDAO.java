@@ -11,11 +11,11 @@ public interface IUserDAO {
      List<User> findAll();
      List<String> findAllByUserName();
      List<String> findAllByEmail();
+     User findUserById(int iduser);
 
      boolean existByUsername(String username);
      boolean existByEmail(String email);
      boolean save(User user);
-     void assignClientRole(User user,Roles role);
      boolean existById(User user);
      boolean update(User user);
      boolean deleteById(User user);

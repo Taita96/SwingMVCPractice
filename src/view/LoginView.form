@@ -85,7 +85,7 @@
               <component id="f47ae" class="javax.swing.JButton" binding="btnSignIn">
                 <constraints/>
                 <properties>
-                  <background color="-15108398"/>
+                  <background color="-10453621"/>
                   <font name="Roboto" size="12" style="1"/>
                   <foreground color="-1"/>
                   <label value="SignIn"/>
@@ -96,7 +96,7 @@
                 <constraints/>
                 <properties>
                   <actionCommand value=""/>
-                  <background color="-15108398"/>
+                  <background color="-10453621"/>
                   <font name="Roboto" size="12" style="1"/>
                   <foreground color="-1"/>
                   <text value="SignUp"/>

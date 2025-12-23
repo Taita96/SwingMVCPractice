@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="view.DashboardView">
-  <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="BorderLayout" hgap="0" vgap="0">
+  <grid id="27dc6" binding="JPanelPricipal" layout-manager="BorderLayout" hgap="0" vgap="0">
     <constraints>
-      <xy x="20" y="20" width="841" height="467"/>
+      <xy x="20" y="20" width="841" height="562"/>
     </constraints>
     <properties>
       <background color="-1"/>
     </properties>
     <border type="none"/>
     <children>
-      <grid id="ef3be" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-        <margin top="0" left="0" bottom="0" right="0"/>
+      <grid id="ef3be" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="1" vgap="1">
+        <margin top="0" left="0" bottom="200" right="0"/>
         <constraints border-constraint="West"/>
         <properties>
           <background color="-10453621"/>
         </properties>
         <border type="none"/>
         <children>
-          <grid id="5de60" layout-manager="FlowLayout" hgap="20" vgap="20" flow-align="1">
+          <grid id="5de60" layout-manager="FlowLayout" hgap="40" vgap="2" flow-align="0">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <background color="-10453621"/>
-              <foreground color="-15108398"/>
+              <foreground color="-1"/>
             </properties>
             <border type="none"/>
             <children>
@@ -38,7 +38,7 @@
               </component>
             </children>
           </grid>
-          <grid id="d9dea" layout-manager="GridLayoutManager" row-count="10" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="d9dea" layout-manager="GridLayoutManager" row-count="7" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
@@ -48,14 +48,9 @@
             </properties>
             <border type="none"/>
             <children>
-              <vspacer id="fe11e">
-                <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-                </constraints>
-              </vspacer>
               <grid id="f3009" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
                 <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <background color="-10453621"/>
@@ -65,6 +60,9 @@
                   <component id="950da" class="javax.swing.JButton" binding="btnHome">
                     <constraints/>
                     <properties>
+                      <background color="-10453621"/>
+                      <font name="Roboto" size="12" style="1"/>
+                      <foreground color="-1"/>
                       <text value="Home"/>
                     </properties>
                   </component>
@@ -72,7 +70,7 @@
               </grid>
               <grid id="82bd2" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
                 <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <background color="-10453621"/>
@@ -82,14 +80,17 @@
                   <component id="534d" class="javax.swing.JButton" binding="btnHistory">
                     <constraints/>
                     <properties>
-                      <text value="Purchase History"/>
+                      <background color="-10453621"/>
+                      <font name="Roboto" size="12" style="1"/>
+                      <foreground color="-1"/>
+                      <text value="History"/>
                     </properties>
                   </component>
                 </children>
               </grid>
               <grid id="6c64e" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
                 <constraints>
-                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <background color="-10453621"/>
@@ -99,6 +100,10 @@
                   <component id="aeb65" class="javax.swing.JButton" binding="btnBags">
                     <constraints/>
                     <properties>
+                      <background color="-10453621"/>
+                      <enabled value="true"/>
+                      <font name="Roboto" size="12" style="1"/>
+                      <foreground color="-1"/>
                       <text value="Bags"/>
                     </properties>
                   </component>
@@ -106,7 +111,7 @@
               </grid>
               <grid id="77a6" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
                 <constraints>
-                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <background color="-10453621"/>
@@ -116,14 +121,17 @@
                   <component id="df453" class="javax.swing.JButton" binding="btnProfile">
                     <constraints/>
                     <properties>
-                      <text value="User Profile"/>
+                      <background color="-10453621"/>
+                      <font name="Roboto" size="12" style="1"/>
+                      <foreground color="-1"/>
+                      <text value="Profile"/>
                     </properties>
                   </component>
                 </children>
               </grid>
               <grid id="1ca12" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
                 <constraints>
-                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <background color="-10453621"/>
@@ -133,14 +141,17 @@
                   <component id="2b102" class="javax.swing.JButton" binding="btnSelling">
                     <constraints/>
                     <properties>
-                      <text value="Selling List"/>
+                      <background color="-10453621"/>
+                      <font name="Roboto" size="12" style="1"/>
+                      <foreground color="-1"/>
+                      <text value="Sales"/>
                     </properties>
                   </component>
                 </children>
               </grid>
               <grid id="c2440" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
                 <constraints>
-                  <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <background color="-10453621"/>
@@ -150,6 +161,9 @@
                   <component id="d35e4" class="javax.swing.JButton" binding="btnAddProduct">
                     <constraints/>
                     <properties>
+                      <background color="-10453621"/>
+                      <font name="Roboto" size="12" style="1"/>
+                      <foreground color="-1"/>
                       <text value="Add Product"/>
                     </properties>
                   </component>
@@ -157,7 +171,7 @@
               </grid>
               <grid id="791a1" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
                 <constraints>
-                  <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <background color="-10453621"/>
@@ -167,16 +181,14 @@
                   <component id="6f97e" class="javax.swing.JButton" binding="btnConfig">
                     <constraints/>
                     <properties>
+                      <background color="-10453621"/>
+                      <font name="Roboto" size="12" style="1"/>
+                      <foreground color="-1"/>
                       <text value="Config"/>
                     </properties>
                   </component>
                 </children>
               </grid>
-              <vspacer id="ebc2">
-                <constraints>
-                  <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-                </constraints>
-              </vspacer>
             </children>
           </grid>
         </children>
@@ -184,18 +196,18 @@
       <grid id="2f879" layout-manager="BorderLayout" hgap="5" vgap="5">
         <constraints border-constraint="Center"/>
         <properties>
-          <background color="-789517"/>
+          <background color="-1"/>
         </properties>
         <border type="none"/>
         <children>
           <grid id="68b13" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="2">
             <constraints border-constraint="North"/>
             <properties>
-              <background color="-789517"/>
+              <background color="-1"/>
             </properties>
             <border type="none"/>
             <children>
-              <component id="29b6" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+              <component id="29b6" class="javax.swing.JTextField" binding="txtSearching">
                 <constraints/>
                 <properties>
                   <background color="-1"/>
@@ -203,10 +215,10 @@
                   <horizontalAlignment value="2"/>
                 </properties>
               </component>
-              <grid id="8e3a8" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="2">
+              <grid id="8e3a8" layout-manager="FlowLayout" hgap="10" vgap="5" flow-align="2">
                 <constraints/>
                 <properties>
-                  <background color="-789517"/>
+                  <background color="-1"/>
                 </properties>
                 <border type="none"/>
                 <children>
@@ -215,16 +227,16 @@
                     <properties>
                       <background color="-789517"/>
                       <font name="Roboto" size="12" style="1"/>
-                      <foreground color="-10453621"/>
+                      <foreground color="-16777216"/>
                       <text value="ImgProfile"/>
                     </properties>
                   </component>
-                  <component id="81cbf" class="javax.swing.JLabel" binding="lblProfileOptiones">
+                  <component id="4f866" class="javax.swing.JButton" binding="btnUserPopup">
                     <constraints/>
                     <properties>
-                      <background color="-789517"/>
+                      <background color="-1"/>
                       <font name="Roboto" size="12" style="1"/>
-                      <foreground color="-10453621"/>
+                      <foreground color="-16777216"/>
                       <text value="Profile"/>
                     </properties>
                   </component>
@@ -232,22 +244,2229 @@
               </grid>
             </children>
           </grid>
-          <grid id="3b57d" layout-manager="CardLayout" hgap="5" vgap="5">
+          <grid id="3b57d" binding="JPanelCard" layout-manager="CardLayout" hgap="5" vgap="5">
             <constraints border-constraint="Center"/>
             <properties>
-              <background color="-789517"/>
+              <background color="-1"/>
             </properties>
             <border type="none"/>
             <children>
-              <grid id="d03fa" layout-manager="BorderLayout" hgap="0" vgap="0">
+              <grid id="d03fa" binding="JPanelHome" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
-                  <card name="Card1"/>
+                  <card name="userHome"/>
                 </constraints>
                 <properties>
-                  <background color="-789517"/>
+                  <background color="-1"/>
                 </properties>
                 <border type="none"/>
-                <children/>
+                <children>
+                  <grid id="cf0df" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-1"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <grid id="fa5c5" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <component id="73e4d" class="javax.swing.JLabel">
+                            <constraints/>
+                            <properties>
+                              <font name="Roboto" size="16" style="1"/>
+                              <foreground color="-16777216"/>
+                              <text value="Special Offers"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
+                      <scrollpane id="adf75">
+                        <constraints>
+                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <component id="adffe" class="javax.swing.JTable" binding="tableHome">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </scrollpane>
+                    </children>
+                  </grid>
+                  <grid id="342f1" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-1"/>
+                    </properties>
+                    <border type="bevel-lowered" title="Last Purchase">
+                      <font name="Roboto" size="16" style="1"/>
+                      <title-color color="-16777216"/>
+                      <color color="-4342339"/>
+                    </border>
+                    <children>
+                      <grid id="e94f3" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="bevel-lowered" title="Typo of Product:">
+                          <font name="Roboto" size="12" style="0"/>
+                          <title-color color="-4342339"/>
+                        </border>
+                        <children>
+                          <component id="5fc55" class="javax.swing.JLabel" binding="lblHomeTypoProduct">
+                            <constraints/>
+                            <properties>
+                              <font name="Roboto" size="12" style="1"/>
+                              <foreground color="-16777216"/>
+                              <text value="lblHomeTypoProduct"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
+                      <grid id="e7160" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                        <constraints>
+                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="bevel-lowered" title="Material:">
+                          <font name="Roboto" size="12"/>
+                        </border>
+                        <children>
+                          <component id="47798" class="javax.swing.JLabel" binding="lblHomeMaterial">
+                            <constraints/>
+                            <properties>
+                              <font name="Roboto" size="12" style="1"/>
+                              <foreground color="-16777216"/>
+                              <text value="lblHomeMaterial"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
+                      <grid id="423dc" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                        <constraints>
+                          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="bevel-lowered" title="Brand:">
+                          <font name="Roboto" size="12" style="0"/>
+                          <title-color color="-4473925"/>
+                        </border>
+                        <children>
+                          <component id="ae948" class="javax.swing.JLabel" binding="lblHomeBrand">
+                            <constraints/>
+                            <properties>
+                              <font name="Roboto" size="12" style="1"/>
+                              <foreground color="-16777216"/>
+                              <text value="lblHomeBrand"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
+                      <grid id="3be21" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                        <constraints>
+                          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="bevel-lowered" title="Code:">
+                          <font name="Roboto" size="12" style="0"/>
+                        </border>
+                        <children>
+                          <component id="b064c" class="javax.swing.JLabel" binding="lblHomeCodeBag">
+                            <constraints/>
+                            <properties>
+                              <font name="Roboto" size="12" style="1"/>
+                              <foreground color="-16777216"/>
+                              <text value="lblHomeCode"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
+                    </children>
+                  </grid>
+                  <grid id="5ab72" layout-manager="GridLayoutManager" row-count="3" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-1"/>
+                    </properties>
+                    <border type="empty">
+                      <font/>
+                      <title-color color="-4342339"/>
+                    </border>
+                    <children>
+                      <grid id="b3588" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="3" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="bevel-lowered" title="Address">
+                          <font name="Roboto" size="16" style="1"/>
+                          <title-color color="-16777216"/>
+                          <color color="-4342339"/>
+                        </border>
+                        <children>
+                          <grid id="c09cc" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                            </properties>
+                            <border type="line">
+                              <font/>
+                              <title-color color="-1"/>
+                              <color color="-10453621"/>
+                            </border>
+                            <children>
+                              <component id="7d29c" class="javax.swing.JLabel">
+                                <constraints/>
+                                <properties>
+                                  <font name="Roboto" size="14" style="1"/>
+                                  <foreground color="-16777216"/>
+                                  <text value="Country:"/>
+                                </properties>
+                              </component>
+                              <component id="43d89" class="javax.swing.JLabel" binding="lblHomeCountry">
+                                <constraints/>
+                                <properties>
+                                  <font name="Roboto" size="12" style="1"/>
+                                  <foreground color="-16777216"/>
+                                  <text value="lblCountry"/>
+                                </properties>
+                              </component>
+                            </children>
+                          </grid>
+                          <hspacer id="d457a">
+                            <constraints/>
+                          </hspacer>
+                          <grid id="1b10e" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                            </properties>
+                            <border type="none"/>
+                            <children>
+                              <grid id="904b5" layout-manager="FlowLayout" hgap="10" vgap="5" flow-align="0">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                </properties>
+                                <border type="line">
+                                  <color color="-10453621"/>
+                                </border>
+                                <children>
+                                  <component id="ed4c1" class="javax.swing.JLabel">
+                                    <constraints/>
+                                    <properties>
+                                      <font name="Roboto" size="14" style="1"/>
+                                      <foreground color="-16777216"/>
+                                      <text value="Street"/>
+                                    </properties>
+                                  </component>
+                                  <component id="d59e" class="javax.swing.JLabel" binding="lblHomeStreet">
+                                    <constraints/>
+                                    <properties>
+                                      <font name="Roboto" size="12" style="1"/>
+                                      <foreground color="-16777216"/>
+                                      <text value="lblStreet"/>
+                                    </properties>
+                                  </component>
+                                </children>
+                              </grid>
+                            </children>
+                          </grid>
+                        </children>
+                      </grid>
+                      <grid id="7d10d" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+                        <constraints>
+                          <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="bevel-lowered"/>
+                        <children>
+                          <grid id="848d6" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                            </properties>
+                            <border type="line">
+                              <color color="-10453621"/>
+                            </border>
+                            <children>
+                              <component id="da862" class="javax.swing.JLabel">
+                                <constraints/>
+                                <properties>
+                                  <font name="Roboto" size="14" style="1"/>
+                                  <foreground color="-16777216"/>
+                                  <text value="City"/>
+                                </properties>
+                              </component>
+                              <component id="30623" class="javax.swing.JLabel" binding="lblHomeCity">
+                                <constraints/>
+                                <properties>
+                                  <font name="Roboto" size="12" style="1"/>
+                                  <foreground color="-16777216"/>
+                                  <text value="lblCity"/>
+                                </properties>
+                              </component>
+                            </children>
+                          </grid>
+                          <grid id="6830" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                            </properties>
+                            <border type="none"/>
+                            <children>
+                              <grid id="5d21a" layout-manager="FlowLayout" hgap="10" vgap="5" flow-align="0">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                </properties>
+                                <border type="line">
+                                  <color color="-10453621"/>
+                                </border>
+                                <children>
+                                  <component id="d4111" class="javax.swing.JLabel">
+                                    <constraints/>
+                                    <properties>
+                                      <background color="-789517"/>
+                                      <font name="Roboto" size="14" style="1"/>
+                                      <foreground color="-16777216"/>
+                                      <text value="Apartament Number:"/>
+                                    </properties>
+                                  </component>
+                                  <component id="c0313" class="javax.swing.JLabel" binding="lblHomeNumberApartament">
+                                    <constraints/>
+                                    <properties>
+                                      <font name="Roboto" size="12" style="1"/>
+                                      <foreground color="-16777216"/>
+                                      <text value="lblNumberApartament"/>
+                                    </properties>
+                                  </component>
+                                </children>
+                              </grid>
+                            </children>
+                          </grid>
+                        </children>
+                      </grid>
+                      <grid id="51d0d" layout-manager="BorderLayout" hgap="5" vgap="5">
+                        <constraints>
+                          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="2" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <component id="a7131" class="javax.swing.JButton" binding="btnHomeProfile">
+                            <constraints border-constraint="Center"/>
+                            <properties>
+                              <background color="-16777216"/>
+                              <font name="Roboto" size="12" style="1"/>
+                              <foreground color="-1"/>
+                              <text value="Address Settings"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
+                    </children>
+                  </grid>
+                </children>
+              </grid>
+              <grid id="d8d87" binding="JPanelHistoy" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <card name="userHistory"/>
+                </constraints>
+                <properties>
+                  <background color="-1"/>
+                </properties>
+                <border type="empty" title="Purchase History">
+                  <font name="Roboto" size="14" style="1"/>
+                  <title-color color="-16777216"/>
+                </border>
+                <children>
+                  <scrollpane id="125fb">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-1"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <component id="79c5a" class="javax.swing.JTable" binding="tableHistory">
+                        <constraints/>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </scrollpane>
+                </children>
+              </grid>
+              <grid id="69ff7" binding="JPanelBags" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <card name="userBags"/>
+                </constraints>
+                <properties>
+                  <background color="-1"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <scrollpane id="65dab">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-1"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <component id="e6116" class="javax.swing.JTable" binding="tableBags">
+                        <constraints/>
+                        <properties/>
+                      </component>
+                    </children>
+                  </scrollpane>
+                </children>
+              </grid>
+              <grid id="20628" binding="JPanelViewProfile" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <card name="userViewProfile"/>
+                </constraints>
+                <properties>
+                  <background color="-1"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <grid id="a20a9" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-1"/>
+                    </properties>
+                    <border type="bevel-lowered" title="User Info">
+                      <font name="Roboto" size="14" style="1"/>
+                      <title-color color="-16777216"/>
+                    </border>
+                    <children>
+                      <grid id="13586" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                        <margin top="0" left="0" bottom="0" right="0"/>
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="none" title="Personal Info">
+                          <font name="Roboto" size="12" style="1"/>
+                          <title-color color="-16777216"/>
+                        </border>
+                        <children>
+                          <grid id="8e289" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+                            <constraints>
+                              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <background color="-1"/>
+                            </properties>
+                            <border type="empty"/>
+                            <children>
+                              <grid id="8699b" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                </properties>
+                                <border type="none"/>
+                                <children>
+                                  <component id="cf034" class="javax.swing.JLabel">
+                                    <constraints/>
+                                    <properties>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                      <text value="Name:"/>
+                                    </properties>
+                                  </component>
+                                  <component id="99c9" class="javax.swing.JTextField" binding="txtProfileName">
+                                    <constraints/>
+                                    <properties>
+                                      <columns value="15"/>
+                                      <editable value="false"/>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                    </properties>
+                                  </component>
+                                </children>
+                              </grid>
+                              <grid id="e8b9d" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                  <font name="Roboto" size="12" style="0"/>
+                                  <foreground color="-16777216"/>
+                                </properties>
+                                <border type="none"/>
+                                <children>
+                                  <component id="caa8b" class="javax.swing.JLabel">
+                                    <constraints/>
+                                    <properties>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                      <text value="Last Name:"/>
+                                    </properties>
+                                  </component>
+                                  <component id="e3ea1" class="javax.swing.JTextField" binding="txtProfileLastName">
+                                    <constraints/>
+                                    <properties>
+                                      <columns value="15"/>
+                                      <editable value="false"/>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                    </properties>
+                                  </component>
+                                </children>
+                              </grid>
+                            </children>
+                          </grid>
+                          <grid id="f86f9" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+                            <constraints>
+                              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <background color="-1"/>
+                            </properties>
+                            <border type="none"/>
+                            <children>
+                              <grid id="97646" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                </properties>
+                                <border type="none"/>
+                                <children>
+                                  <component id="90f21" class="javax.swing.JLabel">
+                                    <constraints/>
+                                    <properties>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                      <text value="Username:"/>
+                                    </properties>
+                                  </component>
+                                  <component id="d4501" class="javax.swing.JTextField" binding="txtProfileUsername">
+                                    <constraints/>
+                                    <properties>
+                                      <columns value="15"/>
+                                      <editable value="false"/>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                    </properties>
+                                  </component>
+                                </children>
+                              </grid>
+                              <grid id="f9434" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                </properties>
+                                <border type="none"/>
+                                <children>
+                                  <component id="cebc7" class="javax.swing.JLabel">
+                                    <constraints/>
+                                    <properties>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                      <text value="Email:"/>
+                                    </properties>
+                                  </component>
+                                  <component id="ac79c" class="javax.swing.JTextField" binding="txtProfileEmail">
+                                    <constraints/>
+                                    <properties>
+                                      <columns value="15"/>
+                                      <editable value="false"/>
+                                      <font name="Roboto" size="12" style="1"/>
+                                      <foreground color="-16777216"/>
+                                    </properties>
+                                  </component>
+                                </children>
+                              </grid>
+                            </children>
+                          </grid>
+                          <grid id="b4b26" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+                            <constraints>
+                              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <background color="-1"/>
+                            </properties>
+                            <border type="none"/>
+                            <children>
+                              <grid id="fdd0" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                </properties>
+                                <border type="none"/>
+                                <children>
+                                  <component id="8d4bc" class="javax.swing.JLabel">
+                                    <constraints/>
+                                    <properties>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                      <text value="Birthday:"/>
+                                    </properties>
+                                  </component>
+                                  <component id="2bf7c" class="com.github.lgooddatepicker.components.DatePicker" binding="dpProfileUsername">
+                                    <constraints/>
+                                    <properties>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                    </properties>
+                                  </component>
+                                </children>
+                              </grid>
+                            </children>
+                          </grid>
+                        </children>
+                      </grid>
+                      <grid id="51bcf" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                        <margin top="0" left="0" bottom="0" right="0"/>
+                        <constraints>
+                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="none" title="Address">
+                          <font name="Roboto" size="14" style="1"/>
+                          <title-color color="-16777216"/>
+                        </border>
+                        <children>
+                          <grid id="21c49" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+                            <constraints>
+                              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <background color="-1"/>
+                            </properties>
+                            <border type="empty"/>
+                            <children>
+                              <grid id="1706d" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                </properties>
+                                <border type="none"/>
+                                <children>
+                                  <component id="5d967" class="javax.swing.JLabel">
+                                    <constraints/>
+                                    <properties>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                      <text value="Country:"/>
+                                    </properties>
+                                  </component>
+                                  <component id="2688b" class="javax.swing.JTextField" binding="txtProfileCountry">
+                                    <constraints/>
+                                    <properties>
+                                      <columns value="15"/>
+                                      <editable value="false"/>
+                                      <font name="Roboto" size="12" style="0"/>
+                                    </properties>
+                                  </component>
+                                </children>
+                              </grid>
+                              <grid id="459d" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                </properties>
+                                <border type="none"/>
+                                <children>
+                                  <component id="b6fe6" class="javax.swing.JLabel">
+                                    <constraints/>
+                                    <properties>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                      <text value="City:"/>
+                                    </properties>
+                                  </component>
+                                  <component id="f4ddb" class="javax.swing.JTextField" binding="txtProfileCity">
+                                    <constraints/>
+                                    <properties>
+                                      <columns value="15"/>
+                                      <editable value="false"/>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                    </properties>
+                                  </component>
+                                </children>
+                              </grid>
+                            </children>
+                          </grid>
+                          <grid id="98c4e" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+                            <constraints>
+                              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <background color="-1"/>
+                            </properties>
+                            <border type="empty"/>
+                            <children>
+                              <grid id="68582" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                </properties>
+                                <border type="none"/>
+                                <children>
+                                  <component id="3ab28" class="javax.swing.JLabel">
+                                    <constraints/>
+                                    <properties>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                      <text value="Aparment Number:"/>
+                                    </properties>
+                                  </component>
+                                  <component id="a1505" class="javax.swing.JTextField" binding="txtProfileApartament">
+                                    <constraints/>
+                                    <properties>
+                                      <columns value="15"/>
+                                      <editable value="false"/>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                    </properties>
+                                  </component>
+                                </children>
+                              </grid>
+                              <grid id="d5c3d" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                </properties>
+                                <border type="none"/>
+                                <children>
+                                  <component id="ac701" class="javax.swing.JLabel">
+                                    <constraints/>
+                                    <properties>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                      <text value="Street:"/>
+                                    </properties>
+                                  </component>
+                                  <component id="e124a" class="javax.swing.JTextField" binding="txtProfileStreet">
+                                    <constraints/>
+                                    <properties>
+                                      <columns value="15"/>
+                                      <editable value="false"/>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                    </properties>
+                                  </component>
+                                </children>
+                              </grid>
+                            </children>
+                          </grid>
+                        </children>
+                      </grid>
+                      <grid id="832bd" layout-manager="FlowLayout" hgap="40" vgap="5" flow-align="1">
+                        <constraints>
+                          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <component id="8ca7e" class="javax.swing.JButton" binding="btnProfileHome">
+                            <constraints/>
+                            <properties>
+                              <background color="-10453631"/>
+                              <font name="Roboto" size="12" style="1"/>
+                              <foreground color="-1"/>
+                              <text value="Home"/>
+                            </properties>
+                          </component>
+                          <component id="4492c" class="javax.swing.JButton" binding="btnProfileEdit">
+                            <constraints/>
+                            <properties>
+                              <background color="-10453631"/>
+                              <font name="Roboto" size="12" style="1"/>
+                              <foreground color="-1"/>
+                              <text value="Edit Profile"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
+                    </children>
+                  </grid>
+                </children>
+              </grid>
+              <grid id="98bba" binding="JPanelEditProfile" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <card name="userEditProfile"/>
+                </constraints>
+                <properties>
+                  <background color="-1"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <grid id="21c5a" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-1"/>
+                    </properties>
+                    <border type="none" title="Edit Profile">
+                      <font name="Roboto" size="14" style="1"/>
+                      <title-color color="-16777216"/>
+                    </border>
+                    <children>
+                      <grid id="39743" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                        <margin top="0" left="0" bottom="0" right="0"/>
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="none" title="Personal Info">
+                          <font name="Roboto" size="12" style="1"/>
+                          <title-color color="-16777216"/>
+                        </border>
+                        <children>
+                          <grid id="6a82e" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+                            <constraints>
+                              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <background color="-1"/>
+                            </properties>
+                            <border type="empty"/>
+                            <children>
+                              <grid id="ed5c" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                </properties>
+                                <border type="none"/>
+                                <children>
+                                  <component id="25330" class="javax.swing.JLabel">
+                                    <constraints/>
+                                    <properties>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                      <text value="Name:"/>
+                                    </properties>
+                                  </component>
+                                  <component id="c5ee9" class="javax.swing.JTextField" binding="txtEditProfileName">
+                                    <constraints/>
+                                    <properties>
+                                      <background color="-1"/>
+                                      <columns value="15"/>
+                                      <editable value="true"/>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                    </properties>
+                                  </component>
+                                </children>
+                              </grid>
+                              <grid id="e1b55" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                  <font name="Roboto" size="12" style="0"/>
+                                  <foreground color="-16777216"/>
+                                </properties>
+                                <border type="none"/>
+                                <children>
+                                  <component id="a2118" class="javax.swing.JLabel">
+                                    <constraints/>
+                                    <properties>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                      <text value="Last Name:"/>
+                                    </properties>
+                                  </component>
+                                  <component id="5626" class="javax.swing.JTextField" binding="txtEditProfileLastName">
+                                    <constraints/>
+                                    <properties>
+                                      <background color="-1"/>
+                                      <columns value="15"/>
+                                      <editable value="true"/>
+                                      <foreground color="-16777216"/>
+                                    </properties>
+                                  </component>
+                                </children>
+                              </grid>
+                            </children>
+                          </grid>
+                          <grid id="82dd6" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+                            <constraints>
+                              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <background color="-1"/>
+                            </properties>
+                            <border type="none"/>
+                            <children>
+                              <grid id="1c8ba" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                </properties>
+                                <border type="none"/>
+                                <children>
+                                  <component id="f5d70" class="javax.swing.JLabel">
+                                    <constraints/>
+                                    <properties>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                      <text value="Username:"/>
+                                    </properties>
+                                  </component>
+                                  <component id="bbce7" class="javax.swing.JTextField" binding="txtEditProfileUsername">
+                                    <constraints/>
+                                    <properties>
+                                      <background color="-1"/>
+                                      <columns value="15"/>
+                                      <editable value="true"/>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                    </properties>
+                                  </component>
+                                </children>
+                              </grid>
+                              <grid id="65648" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                </properties>
+                                <border type="none"/>
+                                <children>
+                                  <component id="bb879" class="javax.swing.JLabel">
+                                    <constraints/>
+                                    <properties>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                      <text value="Birthday"/>
+                                    </properties>
+                                  </component>
+                                  <component id="6c39d" class="com.github.lgooddatepicker.components.DatePicker" binding="dpEditProfileBithday">
+                                    <constraints/>
+                                    <properties>
+                                      <background color="-1"/>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                    </properties>
+                                  </component>
+                                </children>
+                              </grid>
+                            </children>
+                          </grid>
+                          <grid id="c0d40" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+                            <constraints>
+                              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <background color="-1"/>
+                            </properties>
+                            <border type="empty"/>
+                            <children>
+                              <grid id="a35b3" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                </properties>
+                                <border type="none"/>
+                                <children>
+                                  <component id="c6019" class="javax.swing.JLabel">
+                                    <constraints/>
+                                    <properties>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                      <text value="Password:"/>
+                                    </properties>
+                                  </component>
+                                  <component id="5281" class="javax.swing.JPasswordField" binding="txtEditProfilePassword">
+                                    <constraints/>
+                                    <properties>
+                                      <background color="-1"/>
+                                      <columns value="15"/>
+                                      <font name="Roboto" size="12" style="1"/>
+                                      <foreground color="-16777216"/>
+                                    </properties>
+                                  </component>
+                                </children>
+                              </grid>
+                              <grid id="7713b" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                </properties>
+                                <border type="none"/>
+                                <children>
+                                  <component id="5d2a6" class="javax.swing.JLabel">
+                                    <constraints/>
+                                    <properties>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                      <text value="Confirm Password"/>
+                                    </properties>
+                                  </component>
+                                  <component id="5af0d" class="javax.swing.JPasswordField" binding="txtEditProfileConfirmPassword">
+                                    <constraints/>
+                                    <properties>
+                                      <background color="-1"/>
+                                      <columns value="15"/>
+                                      <font name="Roboto" size="12" style="1"/>
+                                      <foreground color="-16777216"/>
+                                    </properties>
+                                  </component>
+                                </children>
+                              </grid>
+                            </children>
+                          </grid>
+                        </children>
+                      </grid>
+                      <grid id="10ad1" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                        <margin top="0" left="0" bottom="0" right="0"/>
+                        <constraints>
+                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="none" title="Address">
+                          <font name="Roboto" size="14" style="1"/>
+                          <title-color color="-16777216"/>
+                        </border>
+                        <children>
+                          <grid id="8dd48" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+                            <constraints>
+                              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <background color="-1"/>
+                            </properties>
+                            <border type="empty"/>
+                            <children>
+                              <grid id="7aa3c" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                </properties>
+                                <border type="none"/>
+                                <children>
+                                  <component id="85a0a" class="javax.swing.JLabel">
+                                    <constraints/>
+                                    <properties>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                      <text value="Country:"/>
+                                    </properties>
+                                  </component>
+                                  <component id="d6864" class="javax.swing.JTextField" binding="txtEditProfileCountry">
+                                    <constraints/>
+                                    <properties>
+                                      <background color="-1"/>
+                                      <columns value="15"/>
+                                      <editable value="true"/>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                    </properties>
+                                  </component>
+                                </children>
+                              </grid>
+                              <grid id="454c3" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                </properties>
+                                <border type="none"/>
+                                <children>
+                                  <component id="48d26" class="javax.swing.JLabel">
+                                    <constraints/>
+                                    <properties>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                      <text value="City:"/>
+                                    </properties>
+                                  </component>
+                                  <component id="b62ac" class="javax.swing.JTextField" binding="txtEditProfileCity">
+                                    <constraints/>
+                                    <properties>
+                                      <background color="-1"/>
+                                      <columns value="15"/>
+                                      <editable value="true"/>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                    </properties>
+                                  </component>
+                                </children>
+                              </grid>
+                            </children>
+                          </grid>
+                          <grid id="75370" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+                            <constraints>
+                              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <background color="-1"/>
+                            </properties>
+                            <border type="empty"/>
+                            <children>
+                              <grid id="f1487" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                </properties>
+                                <border type="none"/>
+                                <children>
+                                  <component id="d9b69" class="javax.swing.JLabel">
+                                    <constraints/>
+                                    <properties>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                      <text value="Aparment Number:"/>
+                                    </properties>
+                                  </component>
+                                  <component id="a50d9" class="javax.swing.JTextField" binding="txtEditProfileApartament">
+                                    <constraints/>
+                                    <properties>
+                                      <background color="-1"/>
+                                      <columns value="15"/>
+                                      <editable value="true"/>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                    </properties>
+                                  </component>
+                                </children>
+                              </grid>
+                              <grid id="c3ef4" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                </properties>
+                                <border type="none"/>
+                                <children>
+                                  <component id="fe44a" class="javax.swing.JLabel">
+                                    <constraints/>
+                                    <properties>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                      <text value="Street:"/>
+                                    </properties>
+                                  </component>
+                                  <component id="ea1d3" class="javax.swing.JTextField" binding="txtEditProfileStreet">
+                                    <constraints/>
+                                    <properties>
+                                      <background color="-1"/>
+                                      <columns value="15"/>
+                                      <editable value="false"/>
+                                      <font name="Roboto" size="12" style="0"/>
+                                      <foreground color="-16777216"/>
+                                    </properties>
+                                  </component>
+                                </children>
+                              </grid>
+                            </children>
+                          </grid>
+                        </children>
+                      </grid>
+                      <grid id="221cb" layout-manager="FlowLayout" hgap="40" vgap="5" flow-align="1">
+                        <constraints>
+                          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <component id="68526" class="javax.swing.JButton">
+                            <constraints/>
+                            <properties>
+                              <background color="-10453631"/>
+                              <font name="Roboto" size="12" style="1"/>
+                              <foreground color="-1"/>
+                              <text value="Back"/>
+                            </properties>
+                          </component>
+                          <component id="86a6" class="javax.swing.JButton">
+                            <constraints/>
+                            <properties>
+                              <background color="-16777216"/>
+                              <font name="Roboto" size="12" style="1"/>
+                              <foreground color="-1"/>
+                              <text value="Save"/>
+                            </properties>
+                          </component>
+                          <component id="b864" class="javax.swing.JButton">
+                            <constraints/>
+                            <properties>
+                              <background color="-2485"/>
+                              <font name="Roboto" size="12" style="1"/>
+                              <foreground color="-1"/>
+                              <text value="Clean"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
+                    </children>
+                  </grid>
+                </children>
+              </grid>
+              <grid id="60cb8" binding="JPanelAddProducto" layout-manager="GridLayoutManager" row-count="9" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <card name="adminAddProduct"/>
+                </constraints>
+                <properties>
+                  <background color="-1"/>
+                </properties>
+                <border type="none" title="New Bag">
+                  <font name="Roboto" size="14" style="1"/>
+                  <title-color color="-16777216"/>
+                </border>
+                <children>
+                  <grid id="aa335" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+                    <constraints>
+                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-1"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <grid id="3b2ee" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                        <constraints/>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <component id="151e4" class="javax.swing.JLabel">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <font name="Roboto" size="12" style="1"/>
+                              <foreground color="-16777216"/>
+                              <text value="Precio:"/>
+                            </properties>
+                          </component>
+                          <component id="e71d8" class="javax.swing.JSpinner" binding="spAddPrice">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <font name="Roboto" size="12" style="1"/>
+                              <foreground color="-16777216"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
+                      <grid id="a949c" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                        <constraints/>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <component id="afed9" class="javax.swing.JLabel">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <font name="Roboto" size="12" style="1"/>
+                              <foreground color="-16777216"/>
+                              <text value="Material:"/>
+                            </properties>
+                          </component>
+                          <component id="6903" class="javax.swing.JComboBox" binding="cbAddMaterial">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <font name="Roboto" size="12" style="0"/>
+                              <foreground color="-16777216"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
+                      <grid id="53e9" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                        <constraints/>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <component id="1dcfd" class="javax.swing.JLabel">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <font name="Roboto" size="12" style="1"/>
+                              <foreground color="-16777216"/>
+                              <text value="size"/>
+                            </properties>
+                          </component>
+                          <component id="24675" class="javax.swing.JComboBox" binding="cbAddSize">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <font name="Roboto" size="12" style="0"/>
+                              <foreground color="-16777216"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
+                    </children>
+                  </grid>
+                  <grid id="a2d44" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+                    <constraints>
+                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-1"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <grid id="ec264" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                        <constraints/>
+                        <properties>
+                          <background color="-1"/>
+                          <foreground color="-16777216"/>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <component id="e099" class="javax.swing.JLabel">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <font name="Roboto" size="12" style="1"/>
+                              <foreground color="-16777216"/>
+                              <text value="Brand:"/>
+                            </properties>
+                          </component>
+                          <component id="60ff1" class="javax.swing.JComboBox" binding="cbAddBrand">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <font name="Roboto" size="12" style="0"/>
+                              <foreground color="-16777216"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
+                      <grid id="d858a" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                        <constraints/>
+                        <properties>
+                          <background color="-1"/>
+                          <font name="Roboto" size="12" style="0"/>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <component id="1b0c0" class="javax.swing.JLabel">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <font name="Roboto" size="12" style="1"/>
+                              <foreground color="-16777216"/>
+                              <text value="Weight:"/>
+                            </properties>
+                          </component>
+                          <component id="46747" class="javax.swing.JSlider" binding="slAddWeight">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <font name="Roboto" size="12" style="1"/>
+                              <foreground color="-16777216"/>
+                              <inverted value="false"/>
+                              <majorTickSpacing value="1"/>
+                              <maximum value="10"/>
+                              <minimum value="1"/>
+                              <minorTickSpacing value="1"/>
+                              <paintLabels value="true"/>
+                              <value value="1"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
+                    </children>
+                  </grid>
+                  <grid id="7e528" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+                    <constraints>
+                      <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-1"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <grid id="667f8" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                        <constraints/>
+                        <properties>
+                          <background color="-1"/>
+                          <foreground color="-16777216"/>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <component id="bbff5" class="javax.swing.JLabel">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <font name="Roboto" size="12" style="1"/>
+                              <foreground color="-16777216"/>
+                              <text value="waterproof"/>
+                            </properties>
+                          </component>
+                          <component id="d2d3" class="javax.swing.JRadioButton" binding="rbAddYesWater">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <font name="Roboto" size="12" style="1"/>
+                              <foreground color="-16777216"/>
+                              <text value="Yes"/>
+                            </properties>
+                          </component>
+                          <component id="9b414" class="javax.swing.JRadioButton" binding="rbAddNoWater">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <font name="Roboto" size="12" style="1"/>
+                              <foreground color="-16777216"/>
+                              <text value="No"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
+                    </children>
+                  </grid>
+                  <component id="95132" class="javax.swing.JLabel" binding="lblNewTypeProduct">
+                    <constraints>
+                      <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <font name="Roboto" size="14" style="1"/>
+                      <foreground color="-16777216"/>
+                      <text value="Product"/>
+                    </properties>
+                  </component>
+                  <grid id="f9ccc" binding="JPanelComponent" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+                    <constraints>
+                      <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-1"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <grid id="ee2ba" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                        <constraints/>
+                        <properties>
+                          <background color="-1"/>
+                          <foreground color="-16777216"/>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <component id="bf8e9" class="javax.swing.JLabel" binding="lblAddgadget">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <font name="Roboto" size="12" style="1"/>
+                              <foreground color="-16777216"/>
+                              <text value="gadget:"/>
+                            </properties>
+                          </component>
+                          <component id="4fa87" class="javax.swing.JComboBox" binding="cbAddGadget">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <font name="Roboto" size="12" style="0"/>
+                              <foreground color="-16777216"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
+                      <grid id="3d81f" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                        <constraints/>
+                        <properties>
+                          <background color="-1"/>
+                          <foreground color="-16777216"/>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <component id="65569" class="javax.swing.JLabel" binding="lblAddSecurity">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <font name="Roboto" size="12" style="1"/>
+                              <foreground color="-16777216"/>
+                              <text value="security"/>
+                            </properties>
+                          </component>
+                          <component id="d0ea8" class="javax.swing.JComboBox" binding="cbAddSecurity">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <font name="Roboto" size="12" style="0"/>
+                              <foreground color="-16777216"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
+                      <grid id="9c77b" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                        <constraints/>
+                        <properties>
+                          <background color="-1"/>
+                          <foreground color="-16777216"/>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <component id="64d55" class="javax.swing.JLabel" binding="lblAddWheels">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <font name="Roboto" size="12" style="1"/>
+                              <foreground color="-16777216"/>
+                              <text value="wheels"/>
+                            </properties>
+                          </component>
+                          <component id="c147f" class="javax.swing.JRadioButton" binding="rbAddYesWheels">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <font name="Roboto" size="12" style="1"/>
+                              <foreground color="-16777216"/>
+                              <text value="Yes"/>
+                            </properties>
+                          </component>
+                          <component id="d540d" class="javax.swing.JRadioButton" binding="rbAddNoWheels">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <font name="Roboto" size="12" style="1"/>
+                              <foreground color="-16777216"/>
+                              <text value="No"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
+                    </children>
+                  </grid>
+                  <grid id="6fd95" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-1"/>
+                    </properties>
+                    <border type="none"/>
+                    <children/>
+                  </grid>
+                  <grid id="29fae" layout-manager="FlowLayout" hgap="40" vgap="5" flow-align="1">
+                    <constraints>
+                      <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-1"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <component id="847ac" class="javax.swing.JButton" binding="btnAddHome">
+                        <constraints/>
+                        <properties>
+                          <background color="-10453631"/>
+                          <font name="Roboto" size="12" style="1"/>
+                          <foreground color="-1"/>
+                          <text value="Home"/>
+                        </properties>
+                      </component>
+                      <component id="aebdf" class="javax.swing.JButton" binding="btnAddSave">
+                        <constraints/>
+                        <properties>
+                          <background color="-16777216"/>
+                          <font name="Roboto" size="12" style="1"/>
+                          <foreground color="-1"/>
+                          <text value="Save"/>
+                        </properties>
+                      </component>
+                      <component id="30b33" class="javax.swing.JButton" binding="btnAddClean">
+                        <constraints/>
+                        <properties>
+                          <background color="-2485"/>
+                          <font name="Roboto" size="12" style="1"/>
+                          <foreground color="-1"/>
+                          <text value="Clean"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
+                  <grid id="da216" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-1"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <grid id="616d" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                        <constraints/>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <component id="c18d0" class="javax.swing.JLabel">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <font name="Roboto" size="12" style="1"/>
+                              <foreground color="-16777216"/>
+                              <text value="Type Product:"/>
+                            </properties>
+                          </component>
+                          <component id="956f0" class="javax.swing.JComboBox" binding="cbAddType">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <font name="Roboto" size="12" style="0"/>
+                              <foreground color="-16777216"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
+                      <grid id="a023e" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                        <constraints/>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <component id="2763f" class="javax.swing.JLabel">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <font name="Roboto" size="12" style="1"/>
+                              <foreground color="-16777216"/>
+                              <text value="Register Date:"/>
+                            </properties>
+                          </component>
+                          <component id="bd970" class="com.github.lgooddatepicker.components.DatePicker" binding="dpAddDate">
+                            <constraints/>
+                            <properties>
+                              <font name="Roboto" size="12" style="0"/>
+                              <foreground color="-16777216"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
+                    </children>
+                  </grid>
+                  <grid id="2bb5e" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-1"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <grid id="fa634" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                        <constraints/>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <component id="c1dea" class="javax.swing.JLabel">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <font name="Roboto" size="12" style="1"/>
+                              <foreground color="-16777216"/>
+                              <text value="Code:"/>
+                            </properties>
+                          </component>
+                          <component id="fb821" class="javax.swing.JTextField" binding="txtAddCode">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <columns value="15"/>
+                              <foreground color="-16777216"/>
+                            </properties>
+                          </component>
+                          <component id="52998" class="javax.swing.JLabel">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <font name="Roboto" size="12" style="1"/>
+                              <foreground color="-16777216"/>
+                              <text value="Last Code:"/>
+                            </properties>
+                          </component>
+                          <component id="439eb" class="javax.swing.JTextField" binding="txtAddLastCode">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <columns value="15"/>
+                              <editable value="false"/>
+                              <foreground color="-16777216"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
+                    </children>
+                  </grid>
+                </children>
+              </grid>
+              <grid id="c08c1" binding="JPanelHomeAdmin" layout-manager="BorderLayout" hgap="0" vgap="0">
+                <constraints>
+                  <card name="adminHomeAdmin"/>
+                </constraints>
+                <properties>
+                  <background color="-1"/>
+                  <enabled value="false"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <tabbedpane id="298bc" binding="tabbedPane1" default-binding="true">
+                    <constraints border-constraint="Center"/>
+                    <properties>
+                      <background color="-10453631"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <grid id="e343d" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                        <margin top="0" left="0" bottom="0" right="0"/>
+                        <constraints>
+                          <tabbedpane title="Home All Products"/>
+                        </constraints>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="none" title="All Product">
+                          <font name="Roboto" size="14" style="1"/>
+                          <title-color color="-16777216"/>
+                        </border>
+                        <children>
+                          <scrollpane id="e6bfe">
+                            <constraints>
+                              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <background color="-1"/>
+                            </properties>
+                            <border type="none"/>
+                            <children>
+                              <component id="ee99" class="javax.swing.JTable" binding="tableAdminProducts">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                </properties>
+                              </component>
+                            </children>
+                          </scrollpane>
+                          <grid id="31231" layout-manager="FlowLayout" hgap="40" vgap="5" flow-align="1">
+                            <constraints>
+                              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <background color="-1"/>
+                            </properties>
+                            <border type="none"/>
+                            <children>
+                              <component id="ca045" class="javax.swing.JButton" binding="btnHomeAdminNewProduct">
+                                <constraints/>
+                                <properties>
+                                  <background color="-10453631"/>
+                                  <font name="Roboto" size="12" style="1"/>
+                                  <foreground color="-1"/>
+                                  <text value="New Product"/>
+                                </properties>
+                              </component>
+                              <component id="2877" class="javax.swing.JButton" binding="btnHomeAdminUpdateForm">
+                                <constraints/>
+                                <properties>
+                                  <background color="-16777216"/>
+                                  <font name="Roboto" size="12" style="1"/>
+                                  <foreground color="-1"/>
+                                  <text value="update from Form"/>
+                                </properties>
+                              </component>
+                              <component id="4bf9b" class="javax.swing.JButton" binding="btnHomeAdminUpdateTable">
+                                <constraints/>
+                                <properties>
+                                  <background color="-2485"/>
+                                  <font name="Roboto" size="12" style="1"/>
+                                  <foreground color="-1"/>
+                                  <text value="Update From Table"/>
+                                </properties>
+                              </component>
+                            </children>
+                          </grid>
+                        </children>
+                      </grid>
+                      <grid id="678c3" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                        <margin top="0" left="0" bottom="0" right="0"/>
+                        <constraints>
+                          <tabbedpane title="Home Sales"/>
+                        </constraints>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="none" title="Sales">
+                          <font name="Roboto" size="12" style="1"/>
+                          <title-color color="-16777216"/>
+                        </border>
+                        <children>
+                          <scrollpane id="32fb0">
+                            <constraints>
+                              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <background color="-1"/>
+                            </properties>
+                            <border type="none"/>
+                            <children>
+                              <component id="60ce" class="javax.swing.JTable" binding="tableHomeAdminSales">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                </properties>
+                              </component>
+                            </children>
+                          </scrollpane>
+                        </children>
+                      </grid>
+                    </children>
+                  </tabbedpane>
+                </children>
+              </grid>
+              <grid id="c737f" binding="JPanelSales" layout-manager="BorderLayout" hgap="0" vgap="0">
+                <constraints>
+                  <card name="adminSales"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <grid id="edaf3" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints border-constraint="Center"/>
+                    <properties>
+                      <background color="-1"/>
+                    </properties>
+                    <border type="none" title="Sales">
+                      <font name="Roboto" size="16" style="1"/>
+                      <title-color color="-16777216"/>
+                    </border>
+                    <children>
+                      <scrollpane id="339bf">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <component id="909f2" class="javax.swing.JTable" binding="tableAdminSales">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </scrollpane>
+                    </children>
+                  </grid>
+                </children>
+              </grid>
+              <grid id="873e3" binding="JPanelConfig" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <card name="adminConfig"/>
+                </constraints>
+                <properties>
+                  <background color="-1"/>
+                </properties>
+                <border type="none" title="Config Data Base">
+                  <font name="Roboto" size="14" style="1"/>
+                  <title-color color="-16777216"/>
+                </border>
+                <children>
+                  <grid id="da65b" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-1"/>
+                      <foreground color="-16777216"/>
+                    </properties>
+                    <border type="none" title="Currently Setup">
+                      <font name="Roboto" size="12" style="1"/>
+                      <title-color color="-16777216"/>
+                    </border>
+                    <children>
+                      <grid id="29f08" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="empty"/>
+                        <children>
+                          <grid id="3b3ea" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                            </properties>
+                            <border type="none"/>
+                            <children>
+                              <component id="6d979" class="javax.swing.JLabel">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                  <font name="Roboto" size="12" style="1"/>
+                                  <foreground color="-16777216"/>
+                                  <text value="IP"/>
+                                </properties>
+                              </component>
+                              <component id="b8b4a" class="javax.swing.JTextField" binding="txtConfigIP">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                  <columns value="15"/>
+                                  <editable value="false"/>
+                                  <font name="Roboto" size="12" style="0"/>
+                                  <foreground color="-16777216"/>
+                                </properties>
+                              </component>
+                            </children>
+                          </grid>
+                          <grid id="a84be" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <font name="Roboto" size="12" style="0"/>
+                              <foreground color="-16777216"/>
+                            </properties>
+                            <border type="none"/>
+                            <children>
+                              <component id="c7bc" class="javax.swing.JLabel">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                  <font name="Roboto" size="12" style="1"/>
+                                  <foreground color="-16777216"/>
+                                  <text value="USER"/>
+                                </properties>
+                              </component>
+                              <component id="4b7cd" class="javax.swing.JTextField" binding="txtConfigUser">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                  <columns value="15"/>
+                                  <editable value="false"/>
+                                  <font name="Roboto" size="12" style="0"/>
+                                  <foreground color="-16777216"/>
+                                </properties>
+                              </component>
+                            </children>
+                          </grid>
+                        </children>
+                      </grid>
+                    </children>
+                  </grid>
+                  <grid id="94e2e" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-1"/>
+                    </properties>
+                    <border type="none" title="Edit Config">
+                      <font name="Roboto" size="14" style="1"/>
+                      <title-color color="-16777216"/>
+                    </border>
+                    <children>
+                      <grid id="5a46" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="empty"/>
+                        <children>
+                          <grid id="af3a8" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                            </properties>
+                            <border type="none"/>
+                            <children>
+                              <component id="714c" class="javax.swing.JLabel">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                  <font name="Roboto" size="12" style="1"/>
+                                  <foreground color="-16777216"/>
+                                  <text value="IP"/>
+                                </properties>
+                              </component>
+                              <component id="e7c1c" class="javax.swing.JTextField" binding="txtConfigEditIP">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                  <columns value="15"/>
+                                  <editable value="true"/>
+                                  <font name="Roboto" size="12" style="0"/>
+                                  <foreground color="-16777216"/>
+                                </properties>
+                              </component>
+                            </children>
+                          </grid>
+                          <grid id="d3814" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <font name="Roboto" size="12" style="0"/>
+                              <foreground color="-16777216"/>
+                            </properties>
+                            <border type="none"/>
+                            <children>
+                              <component id="a75ed" class="javax.swing.JLabel">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                  <font name="Roboto" size="12" style="1"/>
+                                  <foreground color="-16777216"/>
+                                  <text value="USER"/>
+                                </properties>
+                              </component>
+                              <component id="1709e" class="javax.swing.JTextField" binding="txtConfigEditUser">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                  <columns value="15"/>
+                                  <editable value="true"/>
+                                  <font name="Roboto" size="12" style="0"/>
+                                  <foreground color="-16777216"/>
+                                </properties>
+                              </component>
+                            </children>
+                          </grid>
+                        </children>
+                      </grid>
+                      <grid id="cfcb1" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+                        <constraints>
+                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="empty"/>
+                        <children>
+                          <grid id="67b63" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                            </properties>
+                            <border type="none"/>
+                            <children>
+                              <component id="edd03" class="javax.swing.JLabel">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                  <font name="Roboto" size="12" style="1"/>
+                                  <foreground color="-16777216"/>
+                                  <text value="Data Pass:"/>
+                                </properties>
+                              </component>
+                              <component id="32673" class="javax.swing.JPasswordField" binding="txtConfigEditDataPass">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                  <columns value="15"/>
+                                </properties>
+                              </component>
+                            </children>
+                          </grid>
+                          <grid id="3dfda" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <font name="Roboto" size="12" style="0"/>
+                              <foreground color="-16777216"/>
+                            </properties>
+                            <border type="none"/>
+                            <children>
+                              <component id="aa947" class="javax.swing.JLabel">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                  <font name="Roboto" size="12" style="1"/>
+                                  <foreground color="-16777216"/>
+                                  <text value="Confirm Data Pass"/>
+                                </properties>
+                              </component>
+                              <component id="e7d1a" class="javax.swing.JPasswordField" binding="txtConfigEditDataConfirmPass">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                  <columns value="15"/>
+                                </properties>
+                              </component>
+                            </children>
+                          </grid>
+                        </children>
+                      </grid>
+                      <grid id="459df" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+                        <constraints>
+                          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="empty"/>
+                        <children>
+                          <grid id="d13c4" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                            </properties>
+                            <border type="none"/>
+                            <children>
+                              <component id="81c16" class="javax.swing.JLabel">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                  <font name="Roboto" size="12" style="1"/>
+                                  <foreground color="-16777216"/>
+                                  <text value="Admin Pass:"/>
+                                </properties>
+                              </component>
+                              <component id="f5a9c" class="javax.swing.JPasswordField" binding="txtConfigEditAdminPass">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                  <columns value="15"/>
+                                </properties>
+                              </component>
+                            </children>
+                          </grid>
+                          <grid id="f34df" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <font name="Roboto" size="12" style="0"/>
+                              <foreground color="-16777216"/>
+                            </properties>
+                            <border type="none"/>
+                            <children>
+                              <component id="59d18" class="javax.swing.JLabel">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                  <font name="Roboto" size="12" style="1"/>
+                                  <foreground color="-16777216"/>
+                                  <text value="Confirm Admin Pass"/>
+                                </properties>
+                              </component>
+                              <component id="59824" class="javax.swing.JPasswordField" binding="txtConfigEditAdminConfirmPass">
+                                <constraints/>
+                                <properties>
+                                  <background color="-1"/>
+                                  <columns value="15"/>
+                                </properties>
+                              </component>
+                            </children>
+                          </grid>
+                        </children>
+                      </grid>
+                    </children>
+                  </grid>
+                  <grid id="8571e" layout-manager="FlowLayout" hgap="40" vgap="5" flow-align="1">
+                    <constraints>
+                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-1"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <component id="51411" class="javax.swing.JButton" binding="btnConfigHome">
+                        <constraints/>
+                        <properties>
+                          <background color="-10453631"/>
+                          <font name="Roboto" size="12" style="1"/>
+                          <foreground color="-1"/>
+                          <text value="Home"/>
+                        </properties>
+                      </component>
+                      <component id="90848" class="javax.swing.JButton" binding="btnConfigSave">
+                        <constraints/>
+                        <properties>
+                          <background color="-16777216"/>
+                          <font name="Roboto" size="12" style="1"/>
+                          <foreground color="-1"/>
+                          <text value="Save"/>
+                        </properties>
+                      </component>
+                      <component id="3390" class="javax.swing.JButton" binding="btnConfigClean">
+                        <constraints/>
+                        <properties>
+                          <background color="-2485"/>
+                          <font name="Roboto" size="12" style="1"/>
+                          <foreground color="-1"/>
+                          <text value="Clean"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
+                </children>
               </grid>
             </children>
           </grid>

@@ -4,13 +4,21 @@ import model.entity.User;
 
 public class SessionService {
 
-    private User LoginService;
+    private static User currentUser;
 
-    public User getLoginService() {
-        return LoginService;
+    public static void login(User user) {
+        currentUser = user;
     }
 
-    public void setLoginService(User loginService) {
-        LoginService = loginService;
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+
+    public static void logout() {
+        currentUser = null;
+    }
+
+    public static boolean isLogged() {
+        return currentUser != null;
     }
 }

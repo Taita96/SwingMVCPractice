@@ -10,8 +10,8 @@ username VARCHAR(50) NOT NULL UNIQUE,
 email VARCHAR(50) NOT NULL UNIQUE,
 password VARCHAR(64) NOT NULL,
 birthday DATE NOT NULL,
-created_at DATE,
-updated_at DATE
+created_at TIMESTAMP,
+updated_at TIMESTAMP
 );
 --
 CREATE TABLE IF NOT EXISTS address(
@@ -19,14 +19,14 @@ idaddress int auto_increment primary key,
 street VARCHAR(50) NOT NULL,
 city VARCHAR(50) NOT NULL,
 num_apartament VARCHAR(50) NOT NULL,
-created_at DATE,
-updated_at DATE
+created_at TIMESTAMP,
+updated_at TIMESTAMP
 );
 --
 CREATE TABLE IF NOT EXISTS roles(
 idrole VARCHAR(50) primary key,
-created_at DATE,
-updated_at DATE
+created_at TIMESTAMP,
+updated_at TIMESTAMP
 );
 --
 CREATE TABLE IF NOT EXISTS users_has_roles(
@@ -37,9 +37,27 @@ FOREIGN KEY (iduser) REFERENCES users(iduser),
 FOREIGN KEY (idrole) REFERENCES roles(idrole)
 );
 --
-INSERT INTO roles(idrole,created_at,updated_at) VALUES ('ADMIN',CURRENT_DATE,CURRENT_DATE);
+CREATE TABLE IF NOT EXISTS products(
+idproduct INT auto_increment primary key,
+code VARCHAR(50) UNIQUE NOT NULL,
+price DOUBLE NOT NULL,
+material VARCHAR(50) NOT NULL,
+type_product VARCHAR(50) NOT NULL,
+register_day DATE NOT NULL,
+size VARCHAR(50) NOT NULL,
+brand VARCHAR(50) NOT NULL,
+waterproof BOOLEAN NOT NULL,
+weight INT NOT NULL,
+gadget VARCHAR(50) NOT NULL,
+security VARCHAR(50),
+wheels BOOLEAN NOT NULL,
+created_at TIMESTAMP,
+updated_at TIMESTAMP
+);
 --
-INSERT INTO roles(idrole,created_at,updated_at) VALUES ('CLIENT',CURRENT_DATE,CURRENT_DATE);
+INSERT INTO roles(idrole,created_at,updated_at) VALUES ('ADMIN',current_timestamp,current_timestamp);
+--
+INSERT INTO roles(idrole,created_at,updated_at) VALUES ('CLIENT',current_timestamp,current_timestamp);
 --
 create procedure insertAdmin(
      p_name VARCHAR(50),
@@ -48,8 +66,8 @@ create procedure insertAdmin(
      p_email VARCHAR(50),
      p_password VARCHAR(64),
      p_birthday DATE,
-     p_created_at DATE,
-     p_updated_at DATE
+     p_created_at TIMESTAMP,
+     p_updated_at TIMESTAMP
 )
 begin
  DECLARE total INT;
@@ -58,7 +76,7 @@ begin
 
  if(total = 0)
  THEN
-          INSERT INTO users(name, lastname, username, email, password, birthday, created_at,updated_at)
+        INSERT INTO users(name, lastname, username, email, password, birthday, created_at,updated_at)
         VALUES (p_name, p_lastname, p_username, p_email, p_password, p_birthday, p_created_at,p_updated_at);
     END IF;
 END;
@@ -80,3 +98,31 @@ begin
         VALUES (f_iduser,f_idrole);
     END IF;
 END;
+--
+INSERT INTO products
+(code, price, material, type_product, register_day, size, brand, waterproof, weight, gadget, security, wheels, created_at, updated_at)
+VALUES
+('PROD001', 120.50, 'LEATHER', 'BAG', CURRENT_DATE, 'M', 'SAMSONITE', TRUE, 1.2, 'WALLET', 'NONE', FALSE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('PROD002', 89.99, 'FABRIC', 'BAG', CURRENT_DATE, 'L', 'EASTPAK', TRUE, 0.8, 'BACKPACK', 'NONE', FALSE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('PROD003', 150.00, 'CANVAS', 'TRAVELBAG', CURRENT_DATE, 'M', 'ADIDAS', FALSE, 1.5, 'SHOULDERBAG', 'NONE', FALSE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('PROD004', 200.00, 'LEATHER', 'SUITCASE', CURRENT_DATE, 'L', 'NIKE', TRUE, 2.5, 'NONE', 'LOCK', FALSE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('PROD005', 75.50, 'NYLON', 'BAG', CURRENT_DATE, 'S', 'HERSCHEL', FALSE, 0.7, 'HANDSFREE', 'NONE', FALSE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('PROD006', 99.99, 'POLYESTER', 'BAG', CURRENT_DATE, 'M', 'GENERICA', TRUE, 1.0, 'BACKPACK', 'NONE', FALSE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('PROD007', 130.00, 'LEATHER', 'TRAVELBAG', CURRENT_DATE, 'L', 'SAMSONITE', TRUE, 1.8, 'SHOULDERBAG', 'NONE', FALSE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('PROD008', 60.00, 'FABRIC', 'BAG', CURRENT_DATE, 'S', 'EASTPAK', FALSE, 0.6, 'WALLET', 'NONE', FALSE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('PROD009', 180.00, 'NYLON', 'SUITCASE', CURRENT_DATE, 'L', 'ADIDAS', TRUE, 2.0, 'NONE', 'LOCK', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('PROD010', 110.00, 'CANVAS', 'TRAVELBAG', CURRENT_DATE, 'M', 'NIKE', FALSE, 1.4, 'SHOULDERBAG', 'NONE', FALSE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('PROD011', 95.50, 'LEATHER', 'BAG', CURRENT_DATE, 'M', 'HERSCHEL', TRUE, 1.1, 'HANDSFREE', 'NONE', FALSE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('PROD012', 70.00, 'POLYESTER', 'BAG', CURRENT_DATE, 'S', 'GENERICA', FALSE, 0.9, 'BACKPACK', 'NONE', FALSE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('PROD013', 145.00, 'CANVAS', 'TRAVELBAG', CURRENT_DATE, 'L', 'SAMSONITE', TRUE, 1.6, 'SHOULDERBAG', 'NONE', FALSE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('PROD014', 85.00, 'FABRIC', 'BAG', CURRENT_DATE, 'S', 'EASTPAK', FALSE, 0.7, 'WALLET', 'NONE', FALSE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('PROD015', 175.00, 'NYLON', 'SUITCASE', CURRENT_DATE, 'L', 'ADIDAS', TRUE, 2.3, 'NONE', 'LOCK', FALSE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('PROD016', 115.00, 'LEATHER', 'TRAVELBAG', CURRENT_DATE, 'M', 'NIKE', FALSE, 1.5, 'SHOULDERBAG', 'NONE', FALSE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('PROD017', 90.00, 'POLYESTER', 'BAG', CURRENT_DATE, 'S', 'HERSCHEL', TRUE, 0.8, 'HANDSFREE', 'NONE', FALSE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('PROD018', 105.00, 'CANVAS', 'BAG', CURRENT_DATE, 'M', 'GENERICA', TRUE, 1.3, 'BACKPACK', 'NONE', FALSE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('PROD019', 160.00, 'LEATHER', 'TRAVELBAG', CURRENT_DATE, 'L', 'SAMSONITE', TRUE, 1.9, 'SHOULDERBAG', 'NONE', FALSE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('PROD020', 80.00, 'FABRIC', 'BAG', CURRENT_DATE, 'S', 'EASTPAK', FALSE, 0.6, 'WALLET', 'NONE', FALSE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+
+
+

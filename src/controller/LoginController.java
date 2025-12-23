@@ -1,7 +1,9 @@
 package controller;
 
 import model.Model;
+import model.service.SessionService;
 import util.Utilities;
+import view.DashboardView;
 import view.LoginView;
 
 import java.awt.*;
@@ -13,6 +15,7 @@ public class LoginController implements ActionListener {
 
     private LoginView loginView;
     private Model model;
+
     public LoginController(LoginView loginView,Model model){
         this.loginView = loginView;
         this.model = model;
@@ -93,8 +96,20 @@ public class LoginController implements ActionListener {
             loginView.txtPasswordLogin.requestFocus();
             return;
         }
-        model.checkLogin(userName,password);
-        cleanLogin();
+        boolean isLogin = model.checkLogin(userName,password);
+
+        if(isLogin){
+            cleanLogin();
+            onLoginSuccess();
+        }
+
+    }
+
+    private void onLoginSuccess() {
+        DashboardView dashboard = new DashboardView();
+        dashboard.setVisible(true);
+        new DashboardController(dashboard,model);
+        loginView.dispose();
     }
 
     private void cleanFormRegister() {

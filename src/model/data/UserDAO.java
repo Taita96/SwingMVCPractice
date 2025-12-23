@@ -2,21 +2,23 @@ package model.data;
 
 import model.entity.Roles;
 import model.entity.User;
-import model.entity.UserHasRoles;
 import util.DBconection;
 import util.Utilities;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO implements IUserDAO{
+public class UserDAO implements IUserDAO {
 
-    private  RoleDAO roleDAO;
+    private RoleDAO roleDAO;
+    private UserHasRolesDAO userRoleDAO;
 
-    public UserDAO(){
+    public UserDAO() {
         this.roleDAO = new RoleDAO();
+        this.userRoleDAO = new UserHasRolesDAO();
     }
 
     @Override
@@ -33,31 +35,31 @@ public class UserDAO implements IUserDAO{
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
 
-            while (rs.next()){
+            while (rs.next()) {
                 User user = new User();
                 user.setId(rs.getInt(1));
                 user.setName(rs.getString(2));
                 user.setLastName(rs.getString(3));
                 user.setUserName(rs.getString(4));
 
-                user.setBirthday( rs.getDate(5).toLocalDate());
+                user.setBirthday(rs.getDate(5).toLocalDate());
 
-                user.setCreatedAt(rs.getDate(6).toLocalDate());
+                user.setCreatedAt(rs.getTimestamp(6).toLocalDateTime());
 
-                user.setUpdatedAt(rs.getDate(7).toLocalDate());
+                user.setUpdatedAt(rs.getTimestamp(7).toLocalDateTime());
 
                 users.add(user);
             }
 
         } catch (SQLException e) {
             Utilities.showErrorAlert("Error connecting to the database.");
-        }finally {
+        } finally {
             try {
-                if(ps != null){
+                if (ps != null) {
                     ps.close();
                 }
 
-                if(rs != null){
+                if (rs != null) {
                     rs.close();
                 }
 
@@ -84,19 +86,19 @@ public class UserDAO implements IUserDAO{
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
 
-            while (rs.next()){
+            while (rs.next()) {
                 usernames.add(rs.getString("username"));
             }
 
         } catch (SQLException e) {
             Utilities.showErrorAlert("Error connecting to the database.");
-        }finally {
+        } finally {
             try {
-                if(ps != null){
+                if (ps != null) {
                     ps.close();
                 }
 
-                if(rs != null){
+                if (rs != null) {
                     rs.close();
                 }
 
@@ -123,19 +125,19 @@ public class UserDAO implements IUserDAO{
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
 
-            while (rs.next()){
+            while (rs.next()) {
                 emails.add(rs.getString("email"));
             }
 
         } catch (SQLException e) {
             Utilities.showErrorAlert("Error connecting to the database.");
-        }finally {
+        } finally {
             try {
-                if(ps != null){
+                if (ps != null) {
                     ps.close();
                 }
 
-                if(rs != null){
+                if (rs != null) {
                     rs.close();
                 }
 
@@ -149,13 +151,59 @@ public class UserDAO implements IUserDAO{
     }
 
     @Override
+    public User findUserById(int iduser) {
+        User user = null;
+
+        String sql = "SELECT * FROM users WHERE id = ?";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            Connection connection = DBconection.getInstance().getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, iduser);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                user = new User();
+                user.setId(rs.getInt("id"));
+                user.setName(rs.getString("name"));
+                user.setLastName(rs.getString("lastname"));
+            }
+
+        } catch (SQLException e) {
+            Utilities.showErrorAlert("Error connecting to the database.");
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+
+                if (rs != null) {
+                    rs.close();
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        if (user != null) {
+            user.setRoles(userRoleDAO.findRolesByUser(user.getId()));
+        }
+
+
+        return user;
+    }
+
+    @Override
     public boolean existByUsername(String username) {
 
         String sql = "SELECT username FROM users WHERE username = ?";
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        try{
+        try {
             Connection connection = DBconection.getInstance().getConnection();
             ps = connection.prepareStatement(sql);
             ps.setString(1, username);
@@ -165,13 +213,13 @@ public class UserDAO implements IUserDAO{
 
         } catch (SQLException e) {
             Utilities.showErrorAlert("Error connecting to the database.");
-        }finally {
+        } finally {
             try {
-                if(ps != null){
+                if (ps != null) {
                     ps.close();
                 }
 
-                if(rs != null){
+                if (rs != null) {
                     rs.close();
                 }
             } catch (SQLException e) {
@@ -188,7 +236,7 @@ public class UserDAO implements IUserDAO{
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        try{
+        try {
             Connection connection = DBconection.getInstance().getConnection();
             ps = connection.prepareStatement(sql);
             ps.setString(1, email);
@@ -198,13 +246,13 @@ public class UserDAO implements IUserDAO{
 
         } catch (SQLException e) {
             Utilities.showErrorAlert("Error connecting to the database.");
-        }finally {
+        } finally {
             try {
-                if(ps != null){
+                if (ps != null) {
                     ps.close();
                 }
 
-                if(rs != null){
+                if (rs != null) {
                     rs.close();
                 }
             } catch (SQLException e) {
@@ -227,7 +275,8 @@ public class UserDAO implements IUserDAO{
         String sql = "INSERT INTO users (name, lastname, userName, email, password, birthday, created_at, updated_at) VALUES (?,?,?,?,?,?,?,?)";
         PreparedStatement ps = null;
         Connection connection = DBconection.getInstance().getConnection();
-        try{
+        ResultSet rs = null;
+        try {
             ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, user.getName());
             ps.setString(2, user.getLastName());
@@ -238,27 +287,33 @@ public class UserDAO implements IUserDAO{
             ps.setString(5, convertirHashLegible(hash));
 
             ps.setDate(6, Date.valueOf(user.getBirthday()));
-            ps.setDate(7, Date.valueOf(user.getCreatedAt()));
-            ps.setDate(8, Date.valueOf(user.getUpdatedAt()));
+            ps.setTimestamp(7, Timestamp.valueOf(user.getCreatedAt()));
+            ps.setTimestamp(8, Timestamp.valueOf(user.getUpdatedAt()));
 
             int rows = ps.executeUpdate();
 
             if (rows > 0) {
-                try (ResultSet rs = ps.getGeneratedKeys()) {
-                    if (rs.next()) {
-                        user.setId(rs.getInt(1));
-                        assignClientRole(user,role);
-                    }
+                rs = ps.getGeneratedKeys();
+
+                if (rs.next()) {
+                    user.setId(rs.getInt(1));
+                    user.setRoles(role);
+                    userRoleDAO.addRoleToUser(user.getId(), role.getRolName());
                 }
+
                 return true;
             }
 
         } catch (SQLException e) {
             Utilities.showErrorAlert("Error saving new User.");
-        }finally {
+        } finally {
             try {
-                if(ps != null) {
+                if (ps != null) {
                     ps.close();
+                }
+
+                if (rs != null) {
+                    rs.close();
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -270,44 +325,12 @@ public class UserDAO implements IUserDAO{
 
 
     @Override
-    public void assignClientRole(User user, Roles rol) {
-
-        String sql = "INSERT INTO users_has_roles (iduser,idrole) VALUES (?, ?)";
-        Connection connection = DBconection.getInstance().getConnection();
-        PreparedStatement ps = null;
-
-        UserHasRoles userHasRoles = new UserHasRoles(user.getId(),rol.getRolName());
-        try {
-            ps = connection.prepareStatement(sql);
-            ps.setInt(1,user.getId());
-            ps.setString(2,rol.getRolName());
-
-            ps.executeUpdate();
-
-        } catch (SQLException e) {
-            Utilities.showErrorAlert("Error Assinging roles to users.");
-        }finally {
-            try {
-
-                if(ps != null){
-                    ps.close();
-                }
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
-
-    }
-
-    @Override
     public void savedAdmin() {
         String sql = "CALL insertAdmin(?, ?, ?, ?, ?, ?, ?, ?)";
         Connection connection = DBconection.getInstance().getConnection();
         CallableStatement cs = null;
 
-        try{
+        try {
             cs = connection.prepareCall(sql);
             cs.setString(1, "Admin");
             cs.setString(2, "Root");
@@ -315,17 +338,17 @@ public class UserDAO implements IUserDAO{
             cs.setString(4, "admin@admin.com");
             byte[] hash = calcularHash("123456");
             cs.setString(5, convertirHashLegible(hash));
-            cs.setDate(6, java.sql.Date.valueOf(LocalDate.of(2000,1,1)));
-            cs.setDate(7, Date.valueOf(LocalDate.now()));
-            cs.setDate(8, Date.valueOf(LocalDate.now()));
+            cs.setDate(6, Date.valueOf(LocalDate.of(2000, 1, 1)));
+            cs.setTimestamp(7, Timestamp.valueOf(LocalDateTime.now()));
+            cs.setTimestamp(8, Timestamp.valueOf(LocalDateTime.now()));
             cs.executeUpdate();
             roleAdmin();
 
         } catch (SQLException e) {
             Utilities.showErrorAlert("Error Insert Admin Into database.");
-        }finally {
+        } finally {
             try {
-                if(cs != null){
+                if (cs != null) {
                     cs.close();
                 }
             } catch (SQLException e) {
@@ -340,14 +363,14 @@ public class UserDAO implements IUserDAO{
         Connection connection = DBconection.getInstance().getConnection();
         CallableStatement cs = null;
 
-        try{
+        try {
             cs = connection.prepareCall(sql);
             cs.executeUpdate();
         } catch (SQLException e) {
             Utilities.showErrorAlert("Error giving Admin Rol to user Admin.");
-        }finally {
+        } finally {
             try {
-                if(cs != null){
+                if (cs != null) {
                     cs.close();
                 }
             } catch (SQLException e) {
@@ -356,17 +379,20 @@ public class UserDAO implements IUserDAO{
         }
     }
 
-    public boolean checkLogin(String username, String password) {
+    public User Login(String username, String password) {
+
         String sql = null;
-        if(Utilities.validateEmail(username)){
-            sql = "SELECT password FROM users WHERE email = ?";
-        }else{
-            sql = "SELECT password FROM users WHERE username = ?";
+
+        if (Utilities.validateEmail(username)) {
+            sql = "SELECT * FROM users WHERE email = ?";
+        } else {
+            sql = "SELECT * FROM users WHERE username = ?";
         }
 
         PreparedStatement ps = null;
         ResultSet rs = null;
-        try{
+
+        try {
             Connection connection = DBconection.getInstance().getConnection();
             ps = connection.prepareStatement(sql);
             ps.setString(1, username);
@@ -376,31 +402,45 @@ public class UserDAO implements IUserDAO{
                 String hashSavedStr = rs.getString("password");
                 byte[] hashCaculated = calcularHash(password);
 
-                if(hashSavedStr == null || hashCaculated == null){
-                    return false;
+                if (hashSavedStr == null || hashCaculated == null) {
+                    return null;
                 }
 
                 String hashCaculatedStr = convertirHashLegible(hashCaculated);
 
-                return hashSavedStr.equals(hashCaculatedStr);
+                if (hashSavedStr.equals(hashCaculatedStr)) {
+                    User user = new User();
+                    user.setId(rs.getInt("iduser"));
+                    user.setName(rs.getString("name"));
+                    user.setLastName(rs.getString("lastname"));
+                    user.setUserName(rs.getString("username"));
+                    user.setEmail(rs.getString("email"));
+                    user.setBirthday(rs.getDate("birthday").toLocalDate());
+                    user.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
+                    user.setUpdatedAt(rs.getTimestamp("updated_at").toLocalDateTime());
+                    user.setRoles(userRoleDAO.findRolesByUser(user.getId()));
+                    return user;
+                }
+
             }
 
         } catch (SQLException e) {
-            Utilities.showErrorAlert("Error connecting to the database.");
-        }finally {
+            Utilities.showErrorAlert("(LOGIN) Error connecting to the database.");
+        } finally {
             try {
-                if(ps != null){
+                if (ps != null) {
                     ps.close();
                 }
 
-                if(rs != null){
+                if (rs != null) {
                     rs.close();
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-        return false;
+
+        return null;
     }
 
     @Override

@@ -40,7 +40,7 @@ public class LoginView extends JFrame{
         setTitle("SingIn");
         setContentPane(JPanelMain);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         pack();
         initComponent();
         setVisible(true);
@@ -56,22 +56,22 @@ public class LoginView extends JFrame{
 
         dpBirthdateRegister.setDate(LocalDate.now());
 
-        Utilities.setBorderBtn(btnSignIn, Color.white,false);
+        Utilities.setBorderBtn(btnSignIn, Color.white);
         btnSignIn.setActionCommand("SignIn");
 
-        Utilities.setBorderBtn(btnSignUp, Color.white,false);
+        Utilities.setBorderBtn(btnSignUp, Color.white);
         btnSignUp.setActionCommand("SignUp");
 
-        Utilities.setBorderBtn(btnLogin, Color.BLACK,true);
+        Utilities.setBorderBtn(btnLogin, Color.BLACK);
         btnLogin.setActionCommand("Login");
 
-        Utilities.setBorderBtn(btnCleanLogin, primaryColor,true);
+        Utilities.setBorderBtn(btnCleanLogin, primaryColor);
         btnCleanLogin.setActionCommand("CleanLogin");
 
-        Utilities.setBorderBtn(btnRegister, Color.BLACK,true);
+        Utilities.setBorderBtn(btnRegister, Color.BLACK);
         btnRegister.setActionCommand("Register");
 
-        Utilities.setBorderBtn(btnCleanRegister, primaryColor,true);
+        Utilities.setBorderBtn(btnCleanRegister, primaryColor);
         btnCleanRegister.setActionCommand("CleanRegister");
 
         cbShowPasswordLogin.setActionCommand("ShowPassword");
