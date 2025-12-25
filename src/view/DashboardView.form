@@ -2,7 +2,7 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="view.DashboardView">
   <grid id="27dc6" binding="JPanelPricipal" layout-manager="BorderLayout" hgap="0" vgap="0">
     <constraints>
-      <xy x="20" y="20" width="841" height="562"/>
+      <xy x="20" y="20" width="872" height="562"/>
     </constraints>
     <properties>
       <background color="-1"/>
@@ -261,7 +261,7 @@
                 </properties>
                 <border type="none"/>
                 <children>
-                  <grid id="cf0df" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                  <grid id="cf0df" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                     <margin top="0" left="0" bottom="0" right="0"/>
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -285,14 +285,14 @@
                             <properties>
                               <font name="Roboto" size="16" style="1"/>
                               <foreground color="-16777216"/>
-                              <text value="Special Offers"/>
+                              <text value="Preview Bags"/>
                             </properties>
                           </component>
                         </children>
                       </grid>
                       <scrollpane id="adf75">
                         <constraints>
-                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
                           <background color="-1"/>
@@ -307,6 +307,26 @@
                           </component>
                         </children>
                       </scrollpane>
+                      <grid id="a948f" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                        <constraints>
+                          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <component id="49640" class="javax.swing.JButton" binding="btnHomePreviewBack">
+                            <constraints/>
+                            <properties>
+                              <background color="-16777216"/>
+                              <font name="Roboto" size="12" style="1"/>
+                              <foreground color="-1"/>
+                              <text value="Get it!"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
                     </children>
                   </grid>
                   <grid id="342f1" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -638,7 +658,7 @@
                   </scrollpane>
                 </children>
               </grid>
-              <grid id="69ff7" binding="JPanelBags" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="69ff7" binding="JPanelBags" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
                   <card name="userBags"/>
@@ -663,6 +683,47 @@
                       </component>
                     </children>
                   </scrollpane>
+                  <grid id="41e7b" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <autoscrolls value="false"/>
+                      <background color="-1"/>
+                      <foreground color="-16777216"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <grid id="621c8" layout-manager="FlowLayout" hgap="30" vgap="5" flow-align="1">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <component id="e0b33" class="javax.swing.JButton" binding="btnBagsToHome">
+                            <constraints/>
+                            <properties>
+                              <background color="-10453631"/>
+                              <foreground color="-1"/>
+                              <text value="Home"/>
+                            </properties>
+                          </component>
+                          <component id="9dfad" class="javax.swing.JButton" binding="btnBagsBuy">
+                            <constraints/>
+                            <properties>
+                              <background color="-10453759"/>
+                              <foreground color="-1"/>
+                              <text value="Buy"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
+                    </children>
+                  </grid>
                 </children>
               </grid>
               <grid id="20628" binding="JPanelViewProfile" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -856,6 +917,7 @@
                                   <component id="2bf7c" class="com.github.lgooddatepicker.components.DatePicker" binding="dpProfileUsername">
                                     <constraints/>
                                     <properties>
+                                      <enabled value="true"/>
                                       <font name="Roboto" size="12" style="0"/>
                                       <foreground color="-16777216"/>
                                     </properties>
@@ -1062,7 +1124,7 @@
                       <title-color color="-16777216"/>
                     </border>
                     <children>
-                      <grid id="39743" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                      <grid id="39743" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                         <margin top="0" left="0" bottom="0" right="0"/>
                         <constraints>
                           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -1267,6 +1329,44 @@
                               </grid>
                             </children>
                           </grid>
+                          <grid id="e2b92" layout-manager="FlowLayout" hgap="40" vgap="5" flow-align="1">
+                            <constraints>
+                              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <background color="-1"/>
+                            </properties>
+                            <border type="none"/>
+                            <children>
+                              <component id="f6f9a" class="javax.swing.JButton" binding="btnEditProfileBack">
+                                <constraints/>
+                                <properties>
+                                  <background color="-10453631"/>
+                                  <font name="Roboto" size="12" style="1"/>
+                                  <foreground color="-1"/>
+                                  <text value="Back"/>
+                                </properties>
+                              </component>
+                              <component id="5721d" class="javax.swing.JButton" binding="btnEditProfileSave">
+                                <constraints/>
+                                <properties>
+                                  <background color="-16777216"/>
+                                  <font name="Roboto" size="12" style="1"/>
+                                  <foreground color="-1"/>
+                                  <text value="Save"/>
+                                </properties>
+                              </component>
+                              <component id="f396b" class="javax.swing.JButton" binding="btnEditProfileClean">
+                                <constraints/>
+                                <properties>
+                                  <background color="-2485"/>
+                                  <font name="Roboto" size="12" style="1"/>
+                                  <foreground color="-1"/>
+                                  <text value="Clean"/>
+                                </properties>
+                              </component>
+                            </children>
+                          </grid>
                         </children>
                       </grid>
                       <grid id="10ad1" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -1403,7 +1503,7 @@
                                     <properties>
                                       <background color="-1"/>
                                       <columns value="15"/>
-                                      <editable value="false"/>
+                                      <editable value="true"/>
                                       <font name="Roboto" size="12" style="0"/>
                                       <foreground color="-16777216"/>
                                     </properties>
@@ -1423,7 +1523,7 @@
                         </properties>
                         <border type="none"/>
                         <children>
-                          <component id="68526" class="javax.swing.JButton">
+                          <component id="68526" class="javax.swing.JButton" binding="btnEditProfileAddressBack">
                             <constraints/>
                             <properties>
                               <background color="-10453631"/>
@@ -1432,7 +1532,7 @@
                               <text value="Back"/>
                             </properties>
                           </component>
-                          <component id="86a6" class="javax.swing.JButton">
+                          <component id="86a6" class="javax.swing.JButton" binding="btnEditProfileAddressSave">
                             <constraints/>
                             <properties>
                               <background color="-16777216"/>
@@ -1441,7 +1541,7 @@
                               <text value="Save"/>
                             </properties>
                           </component>
-                          <component id="b864" class="javax.swing.JButton">
+                          <component id="b864" class="javax.swing.JButton" binding="btnEditProfileAddressClean">
                             <constraints/>
                             <properties>
                               <background color="-2485"/>
@@ -2032,13 +2132,13 @@
                                   <text value="update from Form"/>
                                 </properties>
                               </component>
-                              <component id="4bf9b" class="javax.swing.JButton" binding="btnHomeAdminUpdateTable">
+                              <component id="d836f" class="javax.swing.JButton" binding="btnHomeAdminDelete">
                                 <constraints/>
                                 <properties>
-                                  <background color="-2485"/>
+                                  <background color="-16777216"/>
                                   <font name="Roboto" size="12" style="1"/>
                                   <foreground color="-1"/>
-                                  <text value="Update From Table"/>
+                                  <text value="Delete"/>
                                 </properties>
                               </component>
                             </children>

@@ -1,7 +1,10 @@
 package model;
 
+import model.data.OrderDAO;
 import model.data.ProductDAO;
 import model.data.UserDAO;
+import model.entity.Address;
+import model.entity.Orders;
 import model.entity.Product;
 import model.entity.User;
 import model.service.SessionService;
@@ -14,10 +17,11 @@ public class Model {
 
     private UserDAO userDAO;
     private ProductDAO productDAO;
-
+    private OrderDAO orderDAO;
     public Model() {
         this.userDAO = new UserDAO();
         this.productDAO = new ProductDAO();
+        this.orderDAO = new OrderDAO();
     }
 
     public void insertUser(String name, String lastName, String username, String email, String password, LocalDate birthday) {
@@ -42,6 +46,16 @@ public class Model {
             Utilities.showInfoAlert("User has been saved successfully");
         }
 
+    }
+
+    public void updateUser(User user){
+        boolean updated = userDAO.update(user);
+
+        if(updated){
+            Utilities.showInfoAlert("User has been update successfully");
+        }else{
+            Utilities.showInfoAlert("it has had a Error updating User");
+        }
     }
 
     public boolean checkLogin(String userName, String password) {
@@ -78,6 +92,14 @@ public class Model {
         return productDAO.findALL();
     }
 
+    public List<Product> getAllProductActive() {
+        return productDAO.findALLByStatusActive();
+    }
+
+    public List<Orders> findAllOrdersByUser(User user) {
+        return orderDAO.findAllByUser(user);
+    }
+
     public void updateProduct(Product product) {
 
         boolean updated = productDAO.update(product);
@@ -87,5 +109,38 @@ public class Model {
             Utilities.showErrorAlert("Product could not be updated");
         }
     }
+
+    public void deleteProduct(Product product){
+        boolean delete = productDAO.delete(product);
+
+        if (delete) {
+            Utilities.showInfoAlert("Product "+ product.getCode() +" deleted successfully");
+        } else {
+            Utilities.showErrorAlert("Product could not be deleted");
+        }
+
+    }
+
+    public void buyProduct(User user, Product product){
+
+        if(user == null || product == null){
+            Utilities.showErrorAlert("User or Product cannot be null");
+            return;
+        }
+
+        boolean success = orderDAO.addProductToOrder(user.getId(), product.getIdProduct(), product.getPrice());
+
+        if(success){
+            productDAO.updateStatusById(product);
+            Utilities.showInfoAlert("Product " + product.getCode() + " purchased successfully!");
+        } else {
+            Utilities.showErrorAlert("Error adding product to the order.");
+        }
+    }
+
+
+
+
+
 
 }

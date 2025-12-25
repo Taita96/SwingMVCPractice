@@ -20,8 +20,9 @@ public class Product {
     private String gadget;
     private String security;
     private boolean wheels;
-    private LocalDateTime createdAt = LocalDateTime.now();
-    private LocalDateTime updatedAt = LocalDateTime.now();
+    private String status;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public Product(String code, double price, String material, String typeProduct, LocalDate registerDay ,String size, String brand, boolean waterproof, int weight, String gadget, String security, boolean wheels) {
         this.code = code;
@@ -39,10 +40,6 @@ public class Product {
     }
 
     public Product() {
-    }
-
-    public LocalDateTime onUpdate(){
-        return LocalDateTime.now();
     }
 
     public Integer getIdProduct() {
@@ -164,6 +161,14 @@ public class Product {
 
     public void setSecurity(String security) {
         this.security = security;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override

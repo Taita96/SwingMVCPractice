@@ -272,7 +272,7 @@ public class UserDAO implements IUserDAO {
             return false;
         }
 
-        String sql = "INSERT INTO users (name, lastname, userName, email, password, birthday, created_at, updated_at) VALUES (?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO users (name, lastname, userName, email, password, birthday, street, city, apartament, country) VALUES (?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement ps = null;
         Connection connection = DBconection.getInstance().getConnection();
         ResultSet rs = null;
@@ -287,8 +287,10 @@ public class UserDAO implements IUserDAO {
             ps.setString(5, convertirHashLegible(hash));
 
             ps.setDate(6, Date.valueOf(user.getBirthday()));
-            ps.setTimestamp(7, Timestamp.valueOf(user.getCreatedAt()));
-            ps.setTimestamp(8, Timestamp.valueOf(user.getUpdatedAt()));
+            ps.setString(7, "UNDEFINED");
+            ps.setString(8, "UNDEFINED");
+            ps.setString(9, "UNDEFINED");
+            ps.setString(10, "UNDEFINED");
 
             int rows = ps.executeUpdate();
 
@@ -326,7 +328,7 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public void savedAdmin() {
-        String sql = "CALL insertAdmin(?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "CALL insertAdmin(?, ?, ?, ?, ?, ?)";
         Connection connection = DBconection.getInstance().getConnection();
         CallableStatement cs = null;
 
@@ -339,12 +341,11 @@ public class UserDAO implements IUserDAO {
             byte[] hash = calcularHash("123456");
             cs.setString(5, convertirHashLegible(hash));
             cs.setDate(6, Date.valueOf(LocalDate.of(2000, 1, 1)));
-            cs.setTimestamp(7, Timestamp.valueOf(LocalDateTime.now()));
-            cs.setTimestamp(8, Timestamp.valueOf(LocalDateTime.now()));
             cs.executeUpdate();
             roleAdmin();
 
         } catch (SQLException e) {
+            e.printStackTrace();
             Utilities.showErrorAlert("Error Insert Admin Into database.");
         } finally {
             try {
@@ -414,8 +415,13 @@ public class UserDAO implements IUserDAO {
                     user.setName(rs.getString("name"));
                     user.setLastName(rs.getString("lastname"));
                     user.setUserName(rs.getString("username"));
+                    user.setPassword(rs.getString("password"));
                     user.setEmail(rs.getString("email"));
                     user.setBirthday(rs.getDate("birthday").toLocalDate());
+                    user.setStreet(rs.getString("street"));
+                    user.setCity(rs.getString("city"));
+                    user.setApartament(rs.getString("apartament"));
+                    user.setCountry(rs.getString("country"));
                     user.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
                     user.setUpdatedAt(rs.getTimestamp("updated_at").toLocalDateTime());
                     user.setRoles(userRoleDAO.findRolesByUser(user.getId()));
@@ -474,7 +480,41 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public boolean update(User user) {
-        return false;
+
+        String sql = "UPDATE users SET name = ?, lastname = ?, username = ?, email = ?, password = ?, birthday = ?, street = ?, city = ?, apartament = ?, country = ? WHERE iduser = ?";
+        Connection connection = DBconection.getInstance().getConnection();
+        PreparedStatement ps = null;
+        boolean updated = false;
+
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(1,user.getName());
+            ps.setString(2,user.getLastName());
+            ps.setString(3,user.getUserName());
+            ps.setString(4,user.getEmail());
+            ps.setString(5,user.getPassword());
+            ps.setDate(6, Date.valueOf(user.getBirthday()));
+            ps.setString(7,user.getStreet());
+            ps.setString(8,user.getCity());
+            ps.setString(9,user.getApartament());
+            ps.setString(10,user.getCountry());
+            ps.setInt(11,user.getId());
+            updated = ps.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        return updated;
     }
 
     @Override

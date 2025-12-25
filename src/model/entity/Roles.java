@@ -9,12 +9,8 @@ import java.util.Set;
 public class Roles {
 
     private String rolName;
-    private LocalDateTime createdAt = LocalDateTime.now();
-    private LocalDateTime updatedAt = LocalDateTime.now();
-
-    public void onUpdate(){
-        this.updatedAt = LocalDateTime.now();
-    }
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public String getRolName() {
         return rolName;

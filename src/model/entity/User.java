@@ -13,10 +13,15 @@ public class User {
     private String userName;
     private String email;
     private String password;
+    private String street;
+    private String city;
+    private String apartament;
+    private String country;
     private LocalDate birthday;
-    private LocalDateTime createdAt = LocalDateTime.now();
-    private LocalDateTime updatedAt = LocalDateTime.now();
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     private Roles roles;
+
 
     public User(String name, String lastName, String userName, String email,String password, LocalDate birthday) {
         this.name = name;
@@ -28,10 +33,6 @@ public class User {
     }
 
     public User() {
-    }
-
-    public void onUpdate(){
-        this.updatedAt = LocalDateTime.now();
     }
 
     public Integer getId() {
@@ -89,27 +90,6 @@ public class User {
         this.roles = roles;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id.equals(user.id);
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -125,4 +105,58 @@ public class User {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getApartament() {
+        return apartament;
+    }
+
+    public void setApartament(String apartament) {
+        this.apartament = apartament;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id.equals(user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
 }

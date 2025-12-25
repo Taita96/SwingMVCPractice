@@ -35,12 +35,17 @@ public class DashboardView extends JFrame{
     public JLabel lblHomeBrand;
     public JLabel lblHomeMaterial;
     public JTable tableHome;
+    public DefaultTableModel dtmTableHome;
+    public JButton btnHomePreviewBack;
 
     public JPanel JPanelHistoy;
+    public DefaultTableModel dtmTableHistory;
     public JTable tableHistory;
 
     public JPanel JPanelBags;
     public JTable tableBags;
+    public JButton btnBagsToHome;
+    public JButton btnBagsBuy;
 
     public JPanel JPanelViewProfile;
     public JTextField txtProfileName;
@@ -66,6 +71,12 @@ public class DashboardView extends JFrame{
     public JTextField txtEditProfileCity;
     public JTextField txtEditProfileApartament;
     public JTextField txtEditProfileStreet;
+    public JButton btnEditProfileAddressBack;
+    public JButton btnEditProfileAddressSave;
+    public JButton btnEditProfileAddressClean;
+    public JButton btnEditProfileBack;
+    public JButton btnEditProfileSave;
+    public JButton btnEditProfileClean;
 
     public JPanel JPanelAddProducto;
     public JComboBox cbAddType;
@@ -86,7 +97,6 @@ public class DashboardView extends JFrame{
     public JButton btnAddClean;
     public JButton btnHomeAdminNewProduct;
     public JButton btnHomeAdminUpdateForm;
-    public JButton btnHomeAdminUpdateTable;
     public JComboBox cbAddSize;
     public JTextField txtAddCode;
     public JTextField txtAddLastCode;
@@ -95,6 +105,7 @@ public class DashboardView extends JFrame{
     public JLabel lblAddWheels;
     public JPanel JPanelComponent;
     public DefaultTableModel dtmTableProducts;
+    public JButton btnHomeAdminDelete;
     public ButtonGroup waterproof;
     public ButtonGroup wheels;
 
@@ -144,8 +155,6 @@ public class DashboardView extends JFrame{
         initTables();
 
     }
-
-
 
     private void initImageIcon(){
         ImageIcon icono = new ImageIcon(getClass().getClassLoader().getResource("maletin.png"));
@@ -208,9 +217,36 @@ public class DashboardView extends JFrame{
         Utilities.setBorderBtn(btnHomeAdminUpdateForm, Color.WHITE);
         btnHomeAdminUpdateForm.setActionCommand("btnHomeAdminUpdateForm");
 
-        Utilities.setBorderBtn(btnHomeAdminUpdateTable, Color.WHITE);
-        btnHomeAdminUpdateTable.setActionCommand("btnHomeAdminUpdateTable");
+        Utilities.setBorderBtn(btnHomeAdminDelete, Color.WHITE);
+        btnHomeAdminDelete.setActionCommand("btnHomeAdminDelete");
 
+
+        Utilities.setBorderBtn(btnEditProfileAddressBack, Color.WHITE);
+        btnEditProfileAddressBack.setActionCommand("btnEditProfileAddressBack");
+
+        Utilities.setBorderBtn(btnEditProfileAddressSave, Color.WHITE);
+        btnEditProfileAddressSave.setActionCommand("btnEditProfileAddressSave");
+
+        Utilities.setBorderBtn(btnEditProfileAddressClean, Color.WHITE);
+        btnEditProfileAddressClean.setActionCommand("btnEditProfileAddressClean");
+
+        Utilities.setBorderBtn(btnEditProfileBack, Color.WHITE);
+        btnEditProfileBack.setActionCommand("btnEditProfileBack");
+
+        Utilities.setBorderBtn(btnEditProfileSave, Color.WHITE);
+        btnEditProfileSave.setActionCommand("btnEditProfileSave");
+
+        Utilities.setBorderBtn(btnEditProfileClean, Color.WHITE);
+        btnEditProfileClean.setActionCommand("btnEditProfileClean");
+
+        Utilities.setBorderBtn(btnHomePreviewBack, Color.WHITE);
+        btnHomePreviewBack.setActionCommand("btnHomePreviewBack");
+
+        Utilities.setBorderBtn(btnBagsToHome, Color.WHITE);
+        btnBagsToHome.setActionCommand("btnBagsToHome");
+
+        Utilities.setBorderBtn(btnBagsBuy, Color.WHITE);
+        btnBagsBuy.setActionCommand("btnBagsBuy");
     }
 
     private void initCombobox() {
@@ -235,7 +271,32 @@ public class DashboardView extends JFrame{
     }
 
     private void initTables() {
-        dtmTableProducts = new DefaultTableModel();
+
+        dtmTableProducts = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return column != 0;
+            }
+        };
         tableAdminProducts.setModel(dtmTableProducts);
+
+        dtmTableHome = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        dtmTableHistory = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        tableHistory.setModel(dtmTableHistory);
+        tableHome.setModel(dtmTableHome);
+        tableBags.setModel(dtmTableHome);
     }
+
+
+
 }

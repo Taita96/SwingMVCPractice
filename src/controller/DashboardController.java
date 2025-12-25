@@ -1,6 +1,7 @@
 package controller;
 
 import model.Model;
+import model.entity.Orders;
 import model.entity.Product;
 import model.entity.enums.*;
 import model.service.SessionService;
@@ -31,14 +32,33 @@ public class DashboardController implements ActionListener, ListSelectionListene
         this.model = model;
         initLogin();
         addActionListener(this);
-        addListSelectionListener();
+        addListSelectionListener(this);
+        addTableModelListener(this);
+
     }
 
-    private void addListSelectionListener() {
+    private void addTableModelListener(TableModelListener e) {
+        dashboardView.dtmTableProducts.addTableModelListener(e);
+    }
+
+
+    private void addListSelectionListener(ListSelectionListener e) {
+
         dashboardView.tableAdminProducts.setCellSelectionEnabled(true);
         ListSelectionModel tableAdminProducts = dashboardView.tableAdminProducts.getSelectionModel();
         tableAdminProducts.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        tableAdminProducts.addListSelectionListener(this);
+        tableAdminProducts.addListSelectionListener(e);
+
+        dashboardView.tableBags.setCellSelectionEnabled(true);
+        ListSelectionModel tableBags = dashboardView.tableBags.getSelectionModel();
+        tableBags.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tableBags.addListSelectionListener(e);
+
+        dashboardView.tableHistory.setCellSelectionEnabled(true);
+        ListSelectionModel tableHistory = dashboardView.tableHistory.getSelectionModel();
+        tableHistory.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tableHistory.addListSelectionListener(e);
+
     }
 
     private void addActionListener(ActionListener e) {
@@ -51,52 +71,82 @@ public class DashboardController implements ActionListener, ListSelectionListene
         dashboardView.btnAddProduct.addActionListener(e);
         dashboardView.btnConfig.addActionListener(e);
         dashboardView.btnHomeProfile.addActionListener(e);
+
+        dashboardView.btnHomePreviewBack.addActionListener(e);
+
+        dashboardView.btnBagsToHome.addActionListener(e);
+        dashboardView.btnBagsBuy.addActionListener(e);
+
         dashboardView.btnProfileHome.addActionListener(e);
+        dashboardView.btnEditProfileAddressBack.addActionListener(e);
+        dashboardView.btnEditProfileAddressSave.addActionListener(e);
+        dashboardView.btnEditProfileAddressClean.addActionListener(e);
+
         dashboardView.btnProfileEdit.addActionListener(e);
+        dashboardView.btnEditProfileBack.addActionListener(e);
+        dashboardView.btnEditProfileSave.addActionListener(e);
+        dashboardView.btnEditProfileClean.addActionListener(e);
+
         dashboardView.btnAddHome.addActionListener(e);
         dashboardView.btnAddSave.addActionListener(e);
         dashboardView.btnAddClean.addActionListener(e);
+
         dashboardView.btnConfigHome.addActionListener(e);
         dashboardView.btnConfigSave.addActionListener(e);
         dashboardView.btnConfigClean.addActionListener(e);
+
         dashboardView.btnHomeAdminNewProduct.addActionListener(e);
         dashboardView.btnHomeAdminUpdateForm.addActionListener(e);
-        dashboardView.btnHomeAdminUpdateTable.addActionListener(e);
+        dashboardView.btnHomeAdminDelete.addActionListener(e);
+
         dashboardView.cbAddType.addActionListener(e);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         String evt = e.getActionCommand();
-
         switch (evt) {
             case "btnHome":
+            case "btnProfileHome":
+            case "btnBagsToHome":
                 showHome();
                 break;
             case "btnHistory":
                 Utilities.displayCard((CardLayout) dashboardView.JPanelCard.getLayout(), dashboardView.JPanelCard, "userHistory");
+                reloadHistoryUser();
                 break;
             case "btnBags":
+            case "btnHomePreviewBack":
                 Utilities.displayCard((CardLayout) dashboardView.JPanelCard.getLayout(), dashboardView.JPanelCard, "userBags");
                 break;
             case "btnProfile":
+            case "btnEditProfileBack":
                 Utilities.displayCard((CardLayout) dashboardView.JPanelCard.getLayout(), dashboardView.JPanelCard, "userViewProfile");
+                break;
+            case "btnEditProfileSave":
+                editProfileInfo();
+                break;
+            case "btnEditProfileAddressSave":
+                editProfileAddressInfo();
                 break;
             case "btnSelling":
                 Utilities.displayCard((CardLayout) dashboardView.JPanelCard.getLayout(), dashboardView.JPanelCard, "adminSales");
                 break;
             case "btnAddProduct":
-            case"btnHomeAdminNewProduct":
+            case "btnHomeAdminNewProduct":
                 Utilities.displayCard((CardLayout) dashboardView.JPanelCard.getLayout(), dashboardView.JPanelCard, "adminAddProduct");
-                break;
-            case "btnProfileHome":
-
                 break;
             case "btnConfig":
                 Utilities.displayCard((CardLayout) dashboardView.JPanelCard.getLayout(), dashboardView.JPanelCard, "adminConfig");
                 break;
             case "btnProfileEdit":
                 Utilities.displayCard((CardLayout) dashboardView.JPanelCard.getLayout(), dashboardView.JPanelCard, "userEditProfile");
+                break;
+            case "btnEditProfileClean":
+                cleanEditProfile();
+                break;
+            case "btnEditProfileAddressClean":
+                cleanEditProfileAddressClean();
                 break;
             case "btnAddHome":
 
@@ -106,6 +156,9 @@ public class DashboardController implements ActionListener, ListSelectionListene
                 break;
             case "btnAddClean":
                 cleanFormProduct();
+                break;
+            case "btnBagsBuy":
+                buyProduct();
                 break;
             case "btnConfigHome":
 
@@ -123,102 +176,18 @@ public class DashboardController implements ActionListener, ListSelectionListene
                 optionAddProduct();
                 break;
             case "btnHomeAdminUpdateForm":
-                    UpdateFromForm();
+                UpdateFromForm();
                 break;
-            case "btnHomeAdminUpdateTable":
-
+            case "btnHomeAdminDelete":
+                deleteProduct();
                 break;
         }
     }
 
-    private void UpdateFromForm() {
-        int row = dashboardView.tableAdminProducts.getSelectedRow();
-
-        if (row < 0) {
-            Utilities.showErrorAlert("Select a product in the table first.");
-            return;
-        }
-        int idProduct = (int) dashboardView.tableAdminProducts.getValueAt(row, 0);
-        String code = String.valueOf(dashboardView.tableAdminProducts.getValueAt(row, 1));
-        dashboardView.txtAddCode.setText(code);
-
-        Object price = dashboardView.tableAdminProducts.getValueAt(row, 2);
-        double priceP = 0 ;
-
-        if (price instanceof Number) {
-            priceP = ((Number) price).doubleValue();
-            dashboardView.spAddPrice.setValue(price);
-        }
-
-        String materialS = String.valueOf(dashboardView.tableAdminProducts.getValueAt(row, 3));
-        Material material = Material.valueOf(materialS);
-        dashboardView.cbAddMaterial.setSelectedItem(material);
-
-        String typeProductS = String.valueOf(dashboardView.tableAdminProducts.getValueAt(row, 4));
-        TypeProduct typeProduct = TypeProduct.valueOf(typeProductS);
-        dashboardView.cbAddType.setSelectedItem(typeProduct);
-
-        LocalDate registerDay = LocalDate.parse(String.valueOf(dashboardView.tableAdminProducts.getValueAt(row, 5)));
-        dashboardView.dpAddDate.setDate(registerDay);
-
-        String sizeS = String.valueOf(dashboardView.tableAdminProducts.getValueAt(row, 6));
-        Size size = Size.valueOf(sizeS);
-        dashboardView.cbAddSize.setSelectedItem(size);
-
-        String brandS = String.valueOf(dashboardView.tableAdminProducts.getValueAt(row, 7));
-        Brand brand = Brand.valueOf(brandS);
-        dashboardView.cbAddBrand.setSelectedItem(brand);
-
-        boolean isWateproof = Boolean.parseBoolean(String.valueOf(dashboardView.tableAdminProducts.getValueAt(row, 8)));
-
-        if(isWateproof){
-            dashboardView.rbAddYesWater.setSelected(true);
-        }else{
-            dashboardView.rbAddNoWater.setSelected(true);
-        }
-
-        int weight = Integer.parseInt(String.valueOf(dashboardView.tableAdminProducts.getValueAt(row, 9)));
-        dashboardView.slAddWeight.setValue(weight);
-
-        switch (typeProduct){
-            case BAG:
-            case TRAVELBAG:
-                String gadgetS = String.valueOf(dashboardView.tableAdminProducts.getValueAt(row, 10));
-                Gadget gadget = Gadget.valueOf(gadgetS);
-                dashboardView.cbAddGadget.setSelectedItem(gadget);
-                dashboardView.cbAddSecurity.setSelectedItem(Security.NONE);
-                dashboardView.rbAddNoWheels.setSelected(false);
-                dashboardView.rbAddYesWheels.setSelected(false);
-                currentProduct = new Product(code,priceP,materialS,typeProductS,registerDay,sizeS,brandS,isWateproof,weight,gadgetS,Security.NONE.toString(),false);
-                currentProduct.setIdProduct(idProduct);
-                break;
-            case SUITCASE:
-                String securityS = String.valueOf(dashboardView.tableAdminProducts.getValueAt(row, 11));
-                Security security = Security.valueOf(securityS);
-                dashboardView.cbAddSecurity.setSelectedItem(security);
-
-                dashboardView.cbAddGadget.setSelectedItem(Gadget.NONE);
-                boolean haveWheels = Boolean.parseBoolean(String.valueOf(dashboardView.tableAdminProducts.getValueAt(row, 12)));
-
-                if(haveWheels){
-                    dashboardView.rbAddYesWheels.setSelected(true);
-                }else{
-                    dashboardView.rbAddNoWheels.setSelected(true);
-                }
-
-                currentProduct = new Product(code,priceP,materialS,typeProductS,registerDay,sizeS,brandS,isWateproof,weight,Gadget.NONE.toString(),securityS,haveWheels);
-                currentProduct.setIdProduct(idProduct);
-                break;
-        }
-        System.out.println("Update currentProduct is: " + currentProduct);
-        Utilities.displayCard((CardLayout) dashboardView.JPanelCard.getLayout(), dashboardView.JPanelCard, "adminAddProduct");
-    }
-
-
+    //INFO GLOBAL
     private void initLogin() {
         dashboardView.btnUserPopup.setText(SessionService.getCurrentUser().getUserName());
         showHome();
-
     }
 
     private void showHome() {
@@ -228,6 +197,12 @@ public class DashboardController implements ActionListener, ListSelectionListene
         switch (rolName) {
             case "CLIENT":
                 Utilities.displayCard(cl, dashboardView.JPanelCard, "userHome");
+                initHomeUser();
+                Utilities.manageBtn(dashboardView.btnSelling, false);
+                Utilities.manageBtn(dashboardView.btnAddProduct, false);
+                Utilities.manageBtn(dashboardView.btnConfig, false);
+                reloadProductsUserActive();
+
                 break;
             case "ADMIN":
                 Utilities.displayCard(cl, dashboardView.JPanelCard, "adminHomeAdmin");
@@ -235,7 +210,7 @@ public class DashboardController implements ActionListener, ListSelectionListene
                 Utilities.manageBtn(dashboardView.btnBags, false);
                 Utilities.manageBtn(dashboardView.btnProfile, false);
                 initFormAddProduct();
-                reloadProducts();
+                reloadProductsActive();
                 break;
             default:
                 System.out.println("Rol desconocido: " + rolName);
@@ -243,32 +218,224 @@ public class DashboardController implements ActionListener, ListSelectionListene
         }
     }
 
-    private void reloadProducts() {
 
-        List<Product> products = model.getAllProducts();
-        String[] comlums = {"ID", "Code", "Price", "Material", "Type", "Registered", "Size", "Brand", "waterproof", "Weight", "Gadget", "Security", "Wheels"};
-        DefaultTableModel modelTable = new DefaultTableModel(comlums, 0);
+    private void reloadProductsActive() {
+        dashboardView.dtmTableProducts.removeTableModelListener(this);
+        List<Product> products = model.getAllProductActive();
+
+        String[] comlums = {"ID", "Code", "Price", "Material", "Type", "Registered", "Size", "Brand", "waterproof", "Weight", "Gadget", "Security", "Wheels, status"};
+        dashboardView.dtmTableProducts.setRowCount(0);
+        dashboardView.dtmTableProducts.setColumnIdentifiers(comlums);
 
         for (Product product : products) {
-            modelTable.addRow(new Object[]{
-                    product.getIdProduct(),
-                    product.getCode(),
-                    product.getPrice(),
-                    product.getMaterial(),
-                    product.getTypeProduct(),
-                    product.getRegisterDay(),
-                    product.getSize(),
-                    product.getBrand(),
-                    product.isWaterproof(),
-                    product.getWeight(),
-                    product.getGadget(),
-                    product.getSecurity(),
-                    product.isWheels()
+                dashboardView.dtmTableProducts.addRow(new Object[]{
+                        product.getIdProduct(),
+                        product.getCode(),
+                        product.getPrice(),
+                        product.getMaterial(),
+                        product.getTypeProduct(),
+                        product.getRegisterDay(),
+                        product.getSize(),
+                        product.getBrand(),
+                        product.isWaterproof(),
+                        product.getWeight(),
+                        product.getGadget(),
+                        product.getSecurity(),
+                        product.isWheels(),
+                        product.getStatus()
+                });
+        }
+    }
+
+
+
+    private void reloadProductsUserActive() {
+        dashboardView.dtmTableHome.removeTableModelListener(this);
+
+        List<Product> products = model.getAllProductActive();
+
+        String[] comlums = {"ID", "Code", "Price", "Material", "Type", "Size", "Brand", "waterproof", "Weight", "Gadget", "Security", "Wheels"};
+        dashboardView.dtmTableHome.setRowCount(0);
+        dashboardView.dtmTableHome.setColumnIdentifiers(comlums);
+
+        for (Product product : products) {
+                dashboardView.dtmTableHome.addRow(new Object[]{
+                        product.getIdProduct(),
+                        product.getCode(),
+                        product.getPrice(),
+                        product.getMaterial(),
+                        product.getTypeProduct(),
+                        product.getSize(),
+                        product.getBrand(),
+                        product.isWaterproof(),
+                        product.getWeight(),
+                        product.getGadget(),
+                        product.getSecurity(),
+                        product.isWheels()
+                });
+        }
+    }
+
+    private void reloadHistoryUser() {
+        dashboardView.dtmTableHistory.removeTableModelListener(this);
+
+        List<Orders> orders = model.findAllOrdersByUser(SessionService.getCurrentUser());
+
+        String[] comlums = {"ID", "Code", "Price","Type"};
+        dashboardView.dtmTableHistory.setRowCount(0);
+        dashboardView.dtmTableHistory.setColumnIdentifiers(comlums);
+
+        for (Orders order : orders) {
+            dashboardView.dtmTableHistory.addRow(new Object[]{
+                    order.getIdOrder(),
+                    order.getProduct().getCode(),
+                    order.getProduct().getPrice(),
+                    order.getProduct().getTypeProduct()
             });
         }
+    }
 
-        dashboardView.tableAdminProducts.setModel(modelTable);
-        isUpdated = false;
+    //NORMAL USER
+
+    private void initHomeUser() {
+
+        dashboardView.lblHomeCountry.setText(SessionService.getCurrentUser().getCountry());
+        dashboardView.lblHomeStreet.setText(SessionService.getCurrentUser().getStreet());
+        dashboardView.lblHomeCity.setText(SessionService.getCurrentUser().getCity());
+        dashboardView.lblHomeNumberApartament.setText(SessionService.getCurrentUser().getApartament());
+
+
+        dashboardView.txtProfileCountry.setText(SessionService.getCurrentUser().getCountry());
+        dashboardView.txtProfileCity.setText(SessionService.getCurrentUser().getCity());
+        dashboardView.txtProfileStreet.setText(SessionService.getCurrentUser().getStreet());
+        dashboardView.txtProfileApartament.setText(SessionService.getCurrentUser().getApartament());
+
+
+        dashboardView.txtProfileName.setText(SessionService.getCurrentUser().getName());
+        dashboardView.txtProfileEmail.setText(SessionService.getCurrentUser().getEmail());
+        dashboardView.txtProfileLastName.setText(SessionService.getCurrentUser().getLastName());
+        dashboardView.txtProfileUsername.setText(SessionService.getCurrentUser().getUserName());
+        dashboardView.dpProfileUsername.setDate(SessionService.getCurrentUser().getBirthday());
+
+    }
+
+    private void editProfileInfo() {
+
+        String nameUser = dashboardView.txtEditProfileName.getText();
+        String lastNameUser = dashboardView.txtProfileLastName.getText();
+        String userUsername = dashboardView.txtEditProfileUsername.getText();
+        String passwordUser = new String(dashboardView.txtEditProfilePassword.getPassword());
+        String passwordConfirmUser = new String(dashboardView.txtEditProfileConfirmPassword.getPassword());
+        LocalDate birthday = dashboardView.dpEditProfileBithday.getDate();
+
+
+        if (passwordUser.isEmpty() && passwordConfirmUser.isEmpty()) {
+            passwordUser = SessionService.getCurrentUser().getPassword();
+            System.out.println(passwordUser);
+        } else {
+            if (!passwordUser.equals(passwordConfirmUser)) {
+                System.out.println(passwordUser + "hola");
+                dashboardView.txtEditProfilePassword.requestFocus();
+                Utilities.showErrorAlert("The password must match the password confirmation.");
+                return;
+            }
+        }
+
+        if (nameUser.isEmpty()) {
+            nameUser = SessionService.getCurrentUser().getUserName();
+        } else {
+            SessionService.getCurrentUser().setName(nameUser);
+        }
+
+        if (lastNameUser.isEmpty()) {
+            lastNameUser = SessionService.getCurrentUser().getLastName();
+        } else {
+            SessionService.getCurrentUser().setLastName(lastNameUser);
+        }
+
+        if (userUsername.isEmpty()) {
+            userUsername = SessionService.getCurrentUser().getUserName();
+        } else {
+            SessionService.getCurrentUser().setUserName(userUsername);
+        }
+
+        if (birthday == null) {
+            birthday = SessionService.getCurrentUser().getBirthday();
+        } else {
+            SessionService.getCurrentUser().setBirthday(birthday);
+        }
+
+        model.updateUser(SessionService.getCurrentUser());
+        initHomeUser();
+        cleanEditProfile();
+        Utilities.displayCard((CardLayout) dashboardView.JPanelCard.getLayout(), dashboardView.JPanelCard, "userViewProfile");
+    }
+
+    private void editProfileAddressInfo() {
+
+        String countryUser = dashboardView.txtEditProfileCountry.getText();
+        String cityUser = dashboardView.txtEditProfileCity.getText();
+        String streetUser = dashboardView.txtEditProfileStreet.getText();
+        String apartamentUser = dashboardView.txtEditProfileApartament.getText();
+
+        if (!checkFormEditAddressUser(countryUser, cityUser, streetUser, apartamentUser)) {
+            return;
+        }
+
+        SessionService.getCurrentUser().setCountry(countryUser);
+        SessionService.getCurrentUser().setCity(cityUser);
+        SessionService.getCurrentUser().setStreet(streetUser);
+        SessionService.getCurrentUser().setApartament(apartamentUser);
+
+        model.updateUser(SessionService.getCurrentUser());
+        initHomeUser();
+        cleanEditProfileAddressClean();
+        Utilities.displayCard((CardLayout) dashboardView.JPanelCard.getLayout(), dashboardView.JPanelCard, "userViewProfile");
+    }
+
+    private boolean checkFormEditAddressUser(String countryUser, String cityUser, String streetUser, String apartamentUser) {
+
+        if (countryUser.isEmpty()) {
+            dashboardView.txtEditProfileCountry.requestFocus();
+            Utilities.showErrorAlert("Please fill the fild Country");
+            return false;
+        }
+
+        if (cityUser.isEmpty()) {
+            dashboardView.txtEditProfileCity.requestFocus();
+            Utilities.showErrorAlert("Please fill the fild city");
+            return false;
+        }
+
+        if (streetUser.isEmpty()) {
+            dashboardView.txtEditProfileStreet.requestFocus();
+            Utilities.showErrorAlert("Please fill the fild Street");
+            return false;
+        }
+
+        if (apartamentUser.isEmpty()) {
+            dashboardView.txtEditProfileApartament.requestFocus();
+            Utilities.showErrorAlert("Please fill the fild Apartament");
+            return false;
+        }
+
+        return true;
+    }
+
+    private void cleanEditProfile() {
+        dashboardView.txtEditProfileName.setText("");
+        dashboardView.txtProfileLastName.setText("");
+        dashboardView.txtEditProfileUsername.setText("");
+        dashboardView.txtEditProfilePassword.setText("");
+        dashboardView.txtEditProfileConfirmPassword.setText("");
+        dashboardView.dpEditProfileBithday.setDate(LocalDate.now());
+    }
+
+    private void cleanEditProfileAddressClean() {
+        dashboardView.txtEditProfileCountry.setText("");
+        dashboardView.txtEditProfileCity.setText("");
+        dashboardView.txtEditProfileStreet.setText("");
+        dashboardView.txtEditProfileApartament.setText("");
     }
 
 
@@ -412,13 +579,13 @@ public class DashboardController implements ActionListener, ListSelectionListene
         String gadgetS = gadget.toString();
 
         Product product = null;
-        if(currentProduct == null){
+        if (currentProduct == null) {
             switch (typeProductS) {
                 case "TRAVELBAG":
                 case "BAG":
                     product = new Product(code, priceP, materialS, typeProductS, dateRegister, sizeS, brandS, waterproofYes, weight, gadgetS, Security.NONE.toString(), false);
                     model.insertProduct(product);
-                    reloadProducts();
+                    reloadProductsActive();
                     cleanFormProduct();
                     break;
                 case "SUITCASE":
@@ -427,12 +594,12 @@ public class DashboardController implements ActionListener, ListSelectionListene
                         String securityS = security.toString();
                         product = new Product(code, priceP, materialS, typeProductS, dateRegister, sizeS, brandS, waterproofYes, weight, Gadget.NONE.toString(), securityS, wheelsYes);
                         model.insertProduct(product);
-                        reloadProducts();
+                        reloadProductsActive();
                         cleanFormProduct();
                     }
                     break;
             }
-        }else if(currentProduct != null){
+        } else if (currentProduct != null) {
             currentProduct.setCode(code);
             currentProduct.setPrice(priceP);
             currentProduct.setMaterial(materialS);
@@ -462,11 +629,134 @@ public class DashboardController implements ActionListener, ListSelectionListene
             }
             System.out.println("currentProduct is: " + currentProduct);
             model.updateProduct(currentProduct);
-            reloadProducts();
+            reloadProductsActive();
             cleanFormProduct();
         }
 
 
+    }
+
+    private void deleteProduct() {
+        int row = dashboardView.tableAdminProducts.getSelectedRow();
+
+        if (row < 0) {
+            Utilities.showErrorAlert("Select a product in the table first.");
+            return;
+        }
+        int idProduct = (int) dashboardView.tableAdminProducts.getValueAt(row, 0);
+        String code = String.valueOf(dashboardView.tableAdminProducts.getValueAt(row, 1));
+        Product productToDelete = new Product();
+        productToDelete.setIdProduct(idProduct);
+        productToDelete.setCode(code);
+        model.deleteProduct(productToDelete);
+        reloadProductsActive();
+    }
+
+    private void buyProduct() {
+
+        int row = dashboardView.tableBags.getSelectedRow();
+
+        if (row < 0) {
+            Utilities.showErrorAlert("Select a product in the table first.");
+            return;
+        }
+
+        Product product = new Product();
+        int idProduct = (int) dashboardView.tableBags.getValueAt(row, 0);
+        double price = (double) dashboardView.tableBags.getValueAt(row, 2);
+        product.setIdProduct(idProduct);
+        product.setPrice(price);
+        System.out.println(SessionService.getCurrentUser() + " iduser");
+        System.out.println(idProduct + " idProduct");
+        System.out.println(price + " price");
+
+
+        model.buyProduct(SessionService.getCurrentUser(), product);
+        reloadProductsUserActive();
+    }
+
+
+    private void UpdateFromForm() {
+        int row = dashboardView.tableAdminProducts.getSelectedRow();
+
+        if (row < 0) {
+            Utilities.showErrorAlert("Select a product in the table first.");
+            return;
+        }
+        int idProduct = (int) dashboardView.tableAdminProducts.getValueAt(row, 0);
+        String code = String.valueOf(dashboardView.tableAdminProducts.getValueAt(row, 1));
+        dashboardView.txtAddCode.setText(code);
+
+        Object price = dashboardView.tableAdminProducts.getValueAt(row, 2);
+        double priceP = 0;
+
+        if (price instanceof Number) {
+            priceP = ((Number) price).doubleValue();
+            dashboardView.spAddPrice.setValue(price);
+        }
+
+        String materialS = String.valueOf(dashboardView.tableAdminProducts.getValueAt(row, 3));
+        Material material = Material.valueOf(materialS);
+        dashboardView.cbAddMaterial.setSelectedItem(material);
+
+        String typeProductS = String.valueOf(dashboardView.tableAdminProducts.getValueAt(row, 4));
+        TypeProduct typeProduct = TypeProduct.valueOf(typeProductS);
+        dashboardView.cbAddType.setSelectedItem(typeProduct);
+
+        LocalDate registerDay = LocalDate.parse(String.valueOf(dashboardView.tableAdminProducts.getValueAt(row, 5)));
+        dashboardView.dpAddDate.setDate(registerDay);
+
+        String sizeS = String.valueOf(dashboardView.tableAdminProducts.getValueAt(row, 6));
+        Size size = Size.valueOf(sizeS);
+        dashboardView.cbAddSize.setSelectedItem(size);
+
+        String brandS = String.valueOf(dashboardView.tableAdminProducts.getValueAt(row, 7));
+        Brand brand = Brand.valueOf(brandS);
+        dashboardView.cbAddBrand.setSelectedItem(brand);
+
+        boolean isWateproof = Boolean.parseBoolean(String.valueOf(dashboardView.tableAdminProducts.getValueAt(row, 8)));
+
+        if (isWateproof) {
+            dashboardView.rbAddYesWater.setSelected(true);
+        } else {
+            dashboardView.rbAddNoWater.setSelected(true);
+        }
+
+        int weight = Integer.parseInt(String.valueOf(dashboardView.tableAdminProducts.getValueAt(row, 9)));
+        dashboardView.slAddWeight.setValue(weight);
+
+        switch (typeProduct) {
+            case BAG:
+            case TRAVELBAG:
+                String gadgetS = String.valueOf(dashboardView.tableAdminProducts.getValueAt(row, 10));
+                Gadget gadget = Gadget.valueOf(gadgetS);
+                dashboardView.cbAddGadget.setSelectedItem(gadget);
+                dashboardView.cbAddSecurity.setSelectedItem(Security.NONE);
+                dashboardView.rbAddNoWheels.setSelected(false);
+                dashboardView.rbAddYesWheels.setSelected(false);
+                currentProduct = new Product(code, priceP, materialS, typeProductS, registerDay, sizeS, brandS, isWateproof, weight, gadgetS, Security.NONE.toString(), false);
+                currentProduct.setIdProduct(idProduct);
+                break;
+            case SUITCASE:
+                String securityS = String.valueOf(dashboardView.tableAdminProducts.getValueAt(row, 11));
+                Security security = Security.valueOf(securityS);
+                dashboardView.cbAddSecurity.setSelectedItem(security);
+
+                dashboardView.cbAddGadget.setSelectedItem(Gadget.NONE);
+                boolean haveWheels = Boolean.parseBoolean(String.valueOf(dashboardView.tableAdminProducts.getValueAt(row, 12)));
+
+                if (haveWheels) {
+                    dashboardView.rbAddYesWheels.setSelected(true);
+                } else {
+                    dashboardView.rbAddNoWheels.setSelected(true);
+                }
+
+                currentProduct = new Product(code, priceP, materialS, typeProductS, registerDay, sizeS, brandS, isWateproof, weight, Gadget.NONE.toString(), securityS, haveWheels);
+                currentProduct.setIdProduct(idProduct);
+                break;
+        }
+        System.out.println("Update currentProduct is: " + currentProduct);
+        Utilities.displayCard((CardLayout) dashboardView.JPanelCard.getLayout(), dashboardView.JPanelCard, "adminAddProduct");
     }
 
 
@@ -578,7 +868,24 @@ public class DashboardController implements ActionListener, ListSelectionListene
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
+        if (!e.getValueIsAdjusting() && !((ListSelectionModel) e.getSource()).isSelectionEmpty()) {
+            if (e.getSource().equals(dashboardView.tableBags.getSelectionModel())) {
+                int row = dashboardView.tableBags.getSelectedRow();
 
+                System.out.println(String.valueOf(dashboardView.tableBags.getValueAt(row, 0)));
+                System.out.println(String.valueOf(dashboardView.tableBags.getValueAt(row, 1)));
+                System.out.println(String.valueOf(dashboardView.tableBags.getValueAt(row, 2)));
+                System.out.println(String.valueOf(dashboardView.tableBags.getValueAt(row, 3)));
+                System.out.println(String.valueOf(dashboardView.tableBags.getValueAt(row, 4)));
+                System.out.println(String.valueOf(dashboardView.tableBags.getValueAt(row, 5)));
+                System.out.println(String.valueOf(dashboardView.tableBags.getValueAt(row, 6)));
+                System.out.println(String.valueOf(dashboardView.tableBags.getValueAt(row, 7)));
+                System.out.println(String.valueOf(dashboardView.tableBags.getValueAt(row, 8)));
+                System.out.println(String.valueOf(dashboardView.tableBags.getValueAt(row, 9)));
+                System.out.println(String.valueOf(dashboardView.tableBags.getValueAt(row, 10)));
+                System.out.println(String.valueOf(dashboardView.tableBags.getValueAt(row, 11)));
+            }
+        }
     }
 
 //    private void checkTypeProducto(){
@@ -594,7 +901,61 @@ public class DashboardController implements ActionListener, ListSelectionListene
 
     @Override
     public void tableChanged(TableModelEvent e) {
+        Object evt = e.getSource();
 
+        if (evt.equals(dashboardView.dtmTableProducts)) {
+            if (e.getType() == TableModelEvent.UPDATE) {
+
+                System.out.println("actualizada");
+
+                int row = e.getFirstRow();
+
+                if (row < 0) {
+                    return;
+                }
+
+                DefaultTableModel dtm = dashboardView.dtmTableProducts;
+
+                int id = Integer.parseInt(dtm.getValueAt(row, 0).toString());
+
+                String code = dtm.getValueAt(row, 1).toString();
+
+                double price = Double.parseDouble(dtm.getValueAt(row, 2).toString());
+
+                String material = dtm.getValueAt(row, 3).toString();
+
+                String type = dtm.getValueAt(row, 4).toString();
+
+                LocalDate registerDay = LocalDate.parse(dtm.getValueAt(row, 5).toString());
+
+                String size = dtm.getValueAt(row, 6).toString();
+
+                String brand = dtm.getValueAt(row, 7).toString();
+
+                boolean waterproof = Boolean.parseBoolean(dtm.getValueAt(row, 8).toString());
+
+                int weight = Integer.parseInt(dtm.getValueAt(row, 9).toString());
+
+                String gadget = dtm.getValueAt(row, 10).toString();
+
+                String security = dtm.getValueAt(row, 11).toString();
+
+                boolean wheels = Boolean.parseBoolean(dtm.getValueAt(row, 12).toString());
+
+
+                Product product = new Product(
+                        code, price, material, type, registerDay,
+                        size, brand, waterproof, weight, gadget, security, wheels
+                );
+                product.setIdProduct(id);
+
+                model.updateProduct(product);
+
+            }
+        }
     }
 
+
 }
+
+
