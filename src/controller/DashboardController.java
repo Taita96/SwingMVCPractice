@@ -26,6 +26,7 @@ public class DashboardController implements ActionListener, ListSelectionListene
     private Model model;
     private boolean isUpdated;
     private Product currentProduct;
+    private Orders lastOrder;
 
     public DashboardController(DashboardView dashboardView, Model model) {
         this.dashboardView = dashboardView;
@@ -197,12 +198,12 @@ public class DashboardController implements ActionListener, ListSelectionListene
         switch (rolName) {
             case "CLIENT":
                 Utilities.displayCard(cl, dashboardView.JPanelCard, "userHome");
-                initHomeUser();
                 Utilities.manageBtn(dashboardView.btnSelling, false);
                 Utilities.manageBtn(dashboardView.btnAddProduct, false);
                 Utilities.manageBtn(dashboardView.btnConfig, false);
                 reloadProductsUserActive();
-
+                reloadHistoryUser();
+                initHomeUser();
                 break;
             case "ADMIN":
                 Utilities.displayCard(cl, dashboardView.JPanelCard, "adminHomeAdmin");
@@ -280,17 +281,21 @@ public class DashboardController implements ActionListener, ListSelectionListene
         dashboardView.dtmTableHistory.removeTableModelListener(this);
 
         List<Orders> orders = model.findAllOrdersByUser(SessionService.getCurrentUser());
-
-        String[] comlums = {"ID", "Code", "Price","Type"};
+        int lastIndex = orders.size() - 1;
+        lastOrder = orders.get(lastIndex);
+        String[] comlums = {"ID","Type","Material","Brand","Code","Price"};
         dashboardView.dtmTableHistory.setRowCount(0);
         dashboardView.dtmTableHistory.setColumnIdentifiers(comlums);
 
         for (Orders order : orders) {
             dashboardView.dtmTableHistory.addRow(new Object[]{
                     order.getIdOrder(),
+                    order.getProduct().getTypeProduct(),
+                    order.getProduct().getMaterial(),
+                    order.getProduct().getMaterial(),
                     order.getProduct().getCode(),
-                    order.getProduct().getPrice(),
-                    order.getProduct().getTypeProduct()
+                    order.getProduct().getPrice()
+
             });
         }
     }
@@ -317,6 +322,10 @@ public class DashboardController implements ActionListener, ListSelectionListene
         dashboardView.txtProfileUsername.setText(SessionService.getCurrentUser().getUserName());
         dashboardView.dpProfileUsername.setDate(SessionService.getCurrentUser().getBirthday());
 
+        dashboardView.lblHomeTypoProduct.setText(lastOrder.getProduct().getTypeProduct());
+        dashboardView.lblHomeBrand.setText(lastOrder.getProduct().getBrand());
+        dashboardView.lblHomeMaterial.setText(lastOrder.getProduct().getMaterial());
+        dashboardView.lblHomeCodeBag.setText(lastOrder.getProduct().getCode());
     }
 
     private void editProfileInfo() {

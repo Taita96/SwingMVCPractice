@@ -46,10 +46,10 @@ public class OrderDAO implements IOrderDAO {
                 product.setSecurity(rs.getString("security"));
                 product.setWheels(rs.getBoolean("wheels"));
 
-                // Construir Orders
+
                 Orders order = new Orders();
                 order.setIdOrder(rs.getInt("idorder"));
-                order.setUser(user); // Usuario que pasamos como parámetro
+                order.setUser(user);
                 order.setProduct(product);
                 order.setStatus(rs.getString("status"));
                 order.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
