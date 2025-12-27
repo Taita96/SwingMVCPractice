@@ -59,6 +59,19 @@ public class DashboardView extends JFrame{
     public DatePicker dpProfileUsername;
     public JButton btnProfileHome;
     public JButton btnProfileEdit;
+    public JButton btnGeneralViewInfo;
+    public JButton btnAddressViewInfo;
+    public JButton btnPreviewADBack;
+    public JButton btnPreviewADDelete;
+    public JButton btnPreviewADHome;
+    public JButton btnPreviewNormalHome;
+    public JButton btnPreviewNormalBack;
+    public JButton btnPreviewNormalDelete;
+    public DefaultTableModel dtmTablePreviewADInfo;
+    public DefaultTableModel dtmTablePreviewNormalInfo;
+    public JTable tablePreviewNormalInfo;
+    public JTable tablePreviewADInfo;
+    public JButton btnPreviewADForm;
 
     public JPanel JPanelEditProfile;
     public JTextField txtEditProfileName;
@@ -67,8 +80,6 @@ public class DashboardView extends JFrame{
     public DatePicker dpEditProfileBithday;
     public JPasswordField txtEditProfilePassword;
     public JPasswordField txtEditProfileConfirmPassword;
-    public JTextField txtEditProfileCountry;
-    public JTextField txtEditProfileCity;
     public JTextField txtEditProfileApartament;
     public JTextField txtEditProfileStreet;
     public JButton btnEditProfileAddressBack;
@@ -77,6 +88,8 @@ public class DashboardView extends JFrame{
     public JButton btnEditProfileBack;
     public JButton btnEditProfileSave;
     public JButton btnEditProfileClean;
+    public JComboBox cbEditProfileCountry;
+    public JComboBox cbEditProfileCity;
 
     public JPanel JPanelAddProducto;
     public JComboBox cbAddType;
@@ -115,6 +128,7 @@ public class DashboardView extends JFrame{
     public JTable tableHomeAdminSales;
 
     public JPanel JPanelSales;
+    public DefaultTableModel dtmtableAdminSales;
     public JTable tableAdminSales;
 
     public JPanel JPanelConfig;
@@ -247,6 +261,34 @@ public class DashboardView extends JFrame{
 
         Utilities.setBorderBtn(btnBagsBuy, Color.WHITE);
         btnBagsBuy.setActionCommand("btnBagsBuy");
+
+        Utilities.setBorderBtn(btnGeneralViewInfo, Color.WHITE);
+        btnGeneralViewInfo.setActionCommand("btnGeneralViewInfo");
+
+        Utilities.setBorderBtn(btnAddressViewInfo, Color.WHITE);
+        btnAddressViewInfo.setActionCommand("btnAddressViewInfo");
+
+        Utilities.setBorderBtn(btnPreviewADBack, Color.WHITE);
+        btnPreviewADBack.setActionCommand("btnPreviewADBack");
+
+        Utilities.setBorderBtn(btnPreviewNormalBack, Color.WHITE);
+        btnPreviewNormalBack.setActionCommand("btnPreviewNormalBack");
+
+        Utilities.setBorderBtn(btnPreviewADHome, Color.WHITE);
+        btnPreviewADHome.setActionCommand("btnPreviewADHome");
+
+        Utilities.setBorderBtn(btnPreviewNormalHome, Color.WHITE);
+        btnPreviewNormalHome.setActionCommand("btnPreviewNormalHome");
+
+        Utilities.setBorderBtn(btnPreviewNormalDelete, Color.WHITE);
+        btnPreviewNormalDelete.setActionCommand("btnPreviewNormalDelete");
+
+        Utilities.setBorderBtn(btnPreviewADDelete, Color.WHITE);
+        btnPreviewADDelete.setActionCommand("btnPreviewADDelete");
+
+        Utilities.setBorderBtn(btnPreviewADForm, Color.WHITE);
+        btnPreviewADForm.setActionCommand("btnPreviewADForm");
+
     }
 
     private void initCombobox() {
@@ -258,6 +300,8 @@ public class DashboardView extends JFrame{
         cbAddGadget.setModel(new DefaultComboBoxModel<Gadget>(Gadget.values()));
         cbAddSecurity.setModel(new DefaultComboBoxModel<Security>(Security.values()));
         cbAddSize.setModel(new DefaultComboBoxModel<Size>(Size.values()));
+        cbEditProfileCountry.setModel(new DefaultComboBoxModel<Country>(Country.values()));
+        cbEditProfileCountry.setActionCommand("cbEditProfileCountry");
     }
 
     private void initRadioButtons(){
@@ -286,6 +330,7 @@ public class DashboardView extends JFrame{
                 return false;
             }
         };
+        tableHome.setModel(dtmTableHome);
         dtmTableHistory = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -293,8 +338,35 @@ public class DashboardView extends JFrame{
             }
         };
         tableHistory.setModel(dtmTableHistory);
-        tableHome.setModel(dtmTableHome);
         tableBags.setModel(dtmTableHome);
+
+
+        dtmTablePreviewADInfo = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return column != 0;
+            }
+        };
+        tablePreviewADInfo.setModel(dtmTablePreviewADInfo);
+
+        dtmTablePreviewNormalInfo = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return column != 0 && column != 4 && column != 6;
+            }
+        };
+
+        tablePreviewNormalInfo.setModel(dtmTablePreviewNormalInfo);
+
+
+        dtmtableAdminSales = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return column != 0;
+            }
+        };
+
+        tableAdminSales.setModel(dtmtableAdminSales);
     }
 
 

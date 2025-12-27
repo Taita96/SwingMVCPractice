@@ -95,4 +95,32 @@ public class UserHasRolesDAO implements IUserHasRolesDAO {
 
         return role;
     }
+
+    public boolean updateRolUser(int userId,Roles role) {
+
+        String sql = "UPDATE users_has_roles SET idrole = ? WHERE iduser = ?";
+        PreparedStatement ps = null;
+        boolean deleted = false;
+        try {
+            ps = DBconection.getInstance().getConnection().prepareStatement(sql);
+            ps.setString(1,role.getRolName());
+            ps.setInt(2, userId);
+
+             deleted = ps.executeUpdate() > 0;
+
+        } catch (SQLException e)  {
+            Utilities.showErrorAlert("Error updating rol to users.");
+        }finally {
+            try {
+
+                if(ps != null){
+                    ps.close();
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return deleted;
+    }
 }

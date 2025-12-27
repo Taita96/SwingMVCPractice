@@ -5,16 +5,13 @@ USE store;
 CREATE TABLE IF NOT EXISTS users(
 iduser int auto_increment primary key,
 name VARCHAR(50) NOT NULL,
-Balance DOUBLE,
 lastname VARCHAR(50) NOT NULL,
 username VARCHAR(50) NOT NULL UNIQUE,
 email VARCHAR(50) NOT NULL UNIQUE,
 password VARCHAR(255) NOT NULL,
 birthday DATE NOT NULL,
-street VARCHAR(50) NOT NULL,
-city VARCHAR(50) NOT NULL,
-apartament VARCHAR(50) NOT NULL,
-country VARCHAR(50) NOT NULL,
+balance DOUBLE DEFAULT 0,
+status ENUM('ACTIVE','DELETED') DEFAULT 'ACTIVE',
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
@@ -54,11 +51,11 @@ updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 --
 CREATE TABLE IF NOT EXISTS address(
 idaddress INT auto_increment PRIMARY KEY,
-Iduser INT NOT NULL,
+iduser INT NOT NULL,
 street VARCHAR(50)  NOT NULL,
 country VARCHAR(50)  NOT NULL,
 city VARCHAR(50)  NOT NULL,
-aparatament VARCHAR(50)  NOT NULL,
+apartarment VARCHAR(50)  NOT NULL,
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
@@ -99,8 +96,8 @@ begin
 
  if(total = 0)
  THEN
-        INSERT INTO users(name, lastname, username, email, password, birthday, street, city, apartament, country)
-        VALUES (p_name, p_lastname, p_username, p_email, p_password, p_birthday,'UNDEFINED','UNDEFINED','UNDEFINED','UNDEFINED');
+        INSERT INTO users(name, lastname, username, email, password, birthday)
+        VALUES (p_name, p_lastname, p_username, p_email, p_password, p_birthday);
     END IF;
 END;
 --

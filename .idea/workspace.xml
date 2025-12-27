@@ -2,11 +2,38 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c80e8f9c-9c01-40f5-b3aa-dbd88dc3e560" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/model/data/AddresDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/model/entity/enums/City.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/model/entity/enums/Country.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/PracticaUD2CarlosGonzalez/controller/DashboardController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PracticaUD2CarlosGonzalez/controller/DashboardController$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/PracticaUD2CarlosGonzalez/controller/DashboardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PracticaUD2CarlosGonzalez/controller/DashboardController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PracticaUD2CarlosGonzalez/model/Model.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PracticaUD2CarlosGonzalez/model/Model.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PracticaUD2CarlosGonzalez/model/data/IUserDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PracticaUD2CarlosGonzalez/model/data/IUserDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PracticaUD2CarlosGonzalez/model/data/UserDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PracticaUD2CarlosGonzalez/model/data/UserDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PracticaUD2CarlosGonzalez/model/data/UserHasRolesDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PracticaUD2CarlosGonzalez/model/data/UserHasRolesDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PracticaUD2CarlosGonzalez/model/entity/Address.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PracticaUD2CarlosGonzalez/model/entity/Address.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PracticaUD2CarlosGonzalez/model/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PracticaUD2CarlosGonzalez/model/entity/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PracticaUD2CarlosGonzalez/util/Utilities$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PracticaUD2CarlosGonzalez/util/Utilities$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PracticaUD2CarlosGonzalez/util/Utilities.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PracticaUD2CarlosGonzalez/util/Utilities.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PracticaUD2CarlosGonzalez/view/DashboardView$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PracticaUD2CarlosGonzalez/view/DashboardView$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PracticaUD2CarlosGonzalez/view/DashboardView$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PracticaUD2CarlosGonzalez/view/DashboardView$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PracticaUD2CarlosGonzalez/view/DashboardView$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PracticaUD2CarlosGonzalez/view/DashboardView$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PracticaUD2CarlosGonzalez/view/DashboardView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PracticaUD2CarlosGonzalez/view/DashboardView.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/data/IProductDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/data/IProductDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/data/IUserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/data/IUserDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/data/OrderDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/data/OrderDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/data/ProductDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/data/ProductDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/data/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/data/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/data/UserHasRolesDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/data/UserHasRolesDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/entity/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entity/Address.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/Utilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Utilities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/DashboardView.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/DashboardView.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/DashboardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/DashboardView.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,8 +58,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -126,7 +153,12 @@
       <workItem from="1766416332768" duration="24951000" />
       <workItem from="1766485108141" duration="27125000" />
       <workItem from="1766578377956" duration="8938000" />
-      <workItem from="1766662604809" duration="17675000" />
+      <workItem from="1766662604809" duration="33561000" />
+      <workItem from="1766754185539" duration="7656000" />
+      <workItem from="1766770060502" duration="253000" />
+      <workItem from="1766836321264" duration="9637000" />
+      <workItem from="1766853991090" duration="3722000" />
+      <workItem from="1766875879702" duration="2354000" />
     </task>
     <servers />
   </component>

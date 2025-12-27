@@ -1,5 +1,8 @@
 package util;
 
+import model.entity.enums.City;
+import model.entity.enums.Country;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
@@ -7,6 +10,7 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 public class Utilities {
 
@@ -84,4 +88,18 @@ public class Utilities {
         return JOptionPane.showConfirmDialog(null,message
                 ,title,JOptionPane.YES_NO_OPTION);
     }
+
+    public static City[] getCitiesByCountry(Country country) {
+
+        ArrayList<City> result = new ArrayList<>();
+
+        for (City city : City.values()) {
+            if (city.getCountry() == country) {
+                result.add(city);
+            }
+        }
+
+        return result.toArray(new City[0]);
+    }
+
 }

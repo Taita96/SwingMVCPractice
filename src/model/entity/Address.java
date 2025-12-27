@@ -8,21 +8,27 @@ public class Address {
     private String street;
     private String country;
     private String city;
-    private String aparatament;
+    private User user;
+    private String apartarment;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public Address(Integer idAddress, String street, String country, String city, String aparatament, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.idAddress = idAddress;
+    public Address(String street, String country, String city, String aparatament) {
         this.street = street;
         this.country = country;
         this.city = city;
-        this.aparatament = aparatament;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.apartarment = aparatament;
     }
 
     public Address() {
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Integer getIdAddress() {
@@ -57,12 +63,12 @@ public class Address {
         this.city = city;
     }
 
-    public String getAparatament() {
-        return aparatament;
+    public String getApartarment() {
+        return apartarment;
     }
 
-    public void setAparatament(String aparatament) {
-        this.aparatament = aparatament;
+    public void setApartarment(String apartarment) {
+        this.apartarment = apartarment;
     }
 
     public LocalDateTime getCreatedAt() {

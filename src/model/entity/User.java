@@ -13,15 +13,14 @@ public class User {
     private String userName;
     private String email;
     private String password;
-    private String street;
-    private String city;
-    private String apartament;
-    private String country;
     private LocalDate birthday;
+    private String status;
+    private double balance;
+    private String profileImage;
+    private Address address;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private Roles roles;
-
 
     public User(String name, String lastName, String userName, String email,String password, LocalDate birthday) {
         this.name = name;
@@ -33,6 +32,30 @@ public class User {
     }
 
     public User() {
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public Integer getId() {
@@ -114,36 +137,12 @@ public class User {
         this.email = email;
     }
 
-    public String getStreet() {
-        return street;
+    public String getStatus() {
+        return status;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getApartament() {
-        return apartament;
-    }
-
-    public void setApartament(String apartament) {
-        this.apartament = apartament;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override

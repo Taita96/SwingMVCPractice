@@ -1,13 +1,14 @@
 package model.data;
 
+import model.entity.Address;
 import model.entity.Roles;
 import model.entity.User;
+import model.entity.UserHasRoles;
 import util.DBconection;
 import util.Utilities;
 
 import java.sql.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,10 +16,12 @@ public class UserDAO implements IUserDAO {
 
     private RoleDAO roleDAO;
     private UserHasRolesDAO userRoleDAO;
+    private AddresDAO addresDAO;
 
     public UserDAO() {
         this.roleDAO = new RoleDAO();
         this.userRoleDAO = new UserHasRolesDAO();
+        this.addresDAO = new AddresDAO();
     }
 
     @Override
@@ -151,52 +154,6 @@ public class UserDAO implements IUserDAO {
     }
 
     @Override
-    public User findUserById(int iduser) {
-        User user = null;
-
-        String sql = "SELECT * FROM users WHERE id = ?";
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        try {
-            Connection connection = DBconection.getInstance().getConnection();
-            ps = connection.prepareStatement(sql);
-            ps.setInt(1, iduser);
-            rs = ps.executeQuery();
-
-            if (rs.next()) {
-                user = new User();
-                user.setId(rs.getInt("id"));
-                user.setName(rs.getString("name"));
-                user.setLastName(rs.getString("lastname"));
-            }
-
-        } catch (SQLException e) {
-            Utilities.showErrorAlert("Error connecting to the database.");
-        } finally {
-            try {
-                if (ps != null) {
-                    ps.close();
-                }
-
-                if (rs != null) {
-                    rs.close();
-                }
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-        }
-
-        if (user != null) {
-            user.setRoles(userRoleDAO.findRolesByUser(user.getId()));
-        }
-
-
-        return user;
-    }
-
-    @Override
     public boolean existByUsername(String username) {
 
         String sql = "SELECT username FROM users WHERE username = ?";
@@ -263,6 +220,52 @@ public class UserDAO implements IUserDAO {
     }
 
     @Override
+    public User findById(int idUser) {
+
+        String sql = "SELECT * FROM users WHERE iduser = ?";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            Connection connection = DBconection.getInstance().getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, idUser);
+            rs = ps.executeQuery();
+
+            if(rs.next()){
+                User user = new User();
+                user.setId(idUser);
+                user.setName(rs.getString("name"));
+                user.setLastName(rs.getString("lastname"));
+                user.setUserName(rs.getString("username"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
+                user.setBirthday(rs.getDate("birthday").toLocalDate());
+                user.setBalance(rs.getDouble("balance"));
+                user.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
+                user.setUpdatedAt(rs.getTimestamp("updated_at").toLocalDateTime());
+                return user;
+            }
+
+        } catch (SQLException e) {
+            Utilities.showErrorAlert("Error connecting to the database.");
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    @Override
     public boolean save(User user) {
 
         Roles role = roleDAO.existsById("CLIENT");
@@ -272,7 +275,7 @@ public class UserDAO implements IUserDAO {
             return false;
         }
 
-        String sql = "INSERT INTO users (name, lastname, userName, email, password, birthday, street, city, apartament, country) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO users (name, lastname, userName, email, password, birthday,balance) VALUES (?,?,?,?,?,?,?)";
         PreparedStatement ps = null;
         Connection connection = DBconection.getInstance().getConnection();
         ResultSet rs = null;
@@ -282,15 +285,10 @@ public class UserDAO implements IUserDAO {
             ps.setString(2, user.getLastName());
             ps.setString(3, user.getUserName());
             ps.setString(4, user.getEmail());
-
             byte[] hash = calcularHash(user.getPassword());
             ps.setString(5, convertirHashLegible(hash));
-
             ps.setDate(6, Date.valueOf(user.getBirthday()));
-            ps.setString(7, "UNDEFINED");
-            ps.setString(8, "UNDEFINED");
-            ps.setString(9, "UNDEFINED");
-            ps.setString(10, "UNDEFINED");
+            ps.setDouble(7,user.getBalance());
 
             int rows = ps.executeUpdate();
 
@@ -307,6 +305,7 @@ public class UserDAO implements IUserDAO {
             }
 
         } catch (SQLException e) {
+            e.printStackTrace();
             Utilities.showErrorAlert("Error saving new User.");
         } finally {
             try {
@@ -385,9 +384,9 @@ public class UserDAO implements IUserDAO {
         String sql = null;
 
         if (Utilities.validateEmail(username)) {
-            sql = "SELECT * FROM users WHERE email = ?";
+            sql = "SELECT * FROM users WHERE email = ? AND status = 'ACTIVE'";
         } else {
-            sql = "SELECT * FROM users WHERE username = ?";
+            sql = "SELECT * FROM users WHERE username = ? AND status = 'ACTIVE'";
         }
 
         PreparedStatement ps = null;
@@ -418,10 +417,8 @@ public class UserDAO implements IUserDAO {
                     user.setPassword(rs.getString("password"));
                     user.setEmail(rs.getString("email"));
                     user.setBirthday(rs.getDate("birthday").toLocalDate());
-                    user.setStreet(rs.getString("street"));
-                    user.setCity(rs.getString("city"));
-                    user.setApartament(rs.getString("apartament"));
-                    user.setCountry(rs.getString("country"));
+                    user.setBalance(rs.getDouble("balance"));
+                    user.setStatus(rs.getString("status"));
                     user.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
                     user.setUpdatedAt(rs.getTimestamp("updated_at").toLocalDateTime());
                     user.setRoles(userRoleDAO.findRolesByUser(user.getId()));
@@ -481,7 +478,7 @@ public class UserDAO implements IUserDAO {
     @Override
     public boolean update(User user) {
 
-        String sql = "UPDATE users SET name = ?, lastname = ?, username = ?, email = ?, password = ?, birthday = ?, street = ?, city = ?, apartament = ?, country = ? WHERE iduser = ?";
+        String sql = "UPDATE users SET name = ?, lastname = ?, username = ?, email = ?, password = ?, birthday = ? WHERE iduser = ?";
         Connection connection = DBconection.getInstance().getConnection();
         PreparedStatement ps = null;
         boolean updated = false;
@@ -494,11 +491,7 @@ public class UserDAO implements IUserDAO {
             ps.setString(4,user.getEmail());
             ps.setString(5,user.getPassword());
             ps.setDate(6, Date.valueOf(user.getBirthday()));
-            ps.setString(7,user.getStreet());
-            ps.setString(8,user.getCity());
-            ps.setString(9,user.getApartament());
-            ps.setString(10,user.getCountry());
-            ps.setInt(11,user.getId());
+            ps.setInt(7,user.getId());
             updated = ps.executeUpdate() > 0;
 
         } catch (SQLException e) {
@@ -519,7 +512,54 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public boolean deleteById(User user) {
-        return false;
+
+        String sql = "UPDATE users SET name = ?, lastname = ?, username = ?, email = ?, password = ?, birthday = ?, status = ? WHERE iduser = ?";
+
+
+
+        Connection connection = DBconection.getInstance().getConnection();
+        PreparedStatement ps = null;
+        boolean deleted = false;
+
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(1,"DELETE_name"+user.getId());
+            ps.setString(2,"DELETE_lastname"+user.getId());
+            ps.setString(3,"DELETE_username"+user.getId());
+            ps.setString(4,"DELETE_email"+user.getId()+"@email.com");
+            ps.setString(5,"DELETE_Password"+user.getId());
+            ps.setDate(6, Date.valueOf(LocalDate.now()));
+            ps.setString(7,"DELETED");
+            ps.setInt(8,user.getId());
+
+            deleted = ps.executeUpdate() > 0;
+
+            if(deleted){
+                Address address = addresDAO.findByUserId(user);
+
+                if(address != null){
+                    address.setCountry("DELETE_USER_COUNTRY" + user.getId());
+                    address.setCity("DELETE_USER_CITY" + user.getId());
+                    address.setStreet("DELETE_USER_STREET" + user.getId());
+                    address.setApartarment("DELETE_USER_APARATAMENT" + user.getId());
+                    user.setAddress(address);
+                    addresDAO.update(user);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return deleted;
     }
 
 

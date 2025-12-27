@@ -12,5 +12,4 @@ public interface IProductDAO {
     boolean delete(Product product);
     boolean updateStatusById(Product product);
     List<Product> findALLByStatusActive();
-
 }

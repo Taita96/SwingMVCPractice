@@ -1,45 +1,61 @@
 package controller;
 
 import model.Model;
+import model.entity.Address;
 import model.entity.Orders;
 import model.entity.Product;
+import model.entity.User;
 import model.entity.enums.*;
 import model.service.SessionService;
+import util.DBconection;
 import util.Utilities;
 import view.DashboardView;
+import view.LoginView;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.time.LocalDate;
 import java.util.List;
 
-public class DashboardController implements ActionListener, ListSelectionListener, TableModelListener {
+public class DashboardController implements ActionListener, ListSelectionListener, TableModelListener, ItemListener {
 
     private DashboardView dashboardView;
     private Model model;
-    private boolean isUpdated;
     private Product currentProduct;
     private Orders lastOrder;
+    private Orders sales;
 
     public DashboardController(DashboardView dashboardView, Model model) {
         this.dashboardView = dashboardView;
         this.model = model;
+
         initLogin();
         addActionListener(this);
         addListSelectionListener(this);
         addTableModelListener(this);
-
+        addItemListener(this);
+        centerAllTables();
     }
 
     private void addTableModelListener(TableModelListener e) {
         dashboardView.dtmTableProducts.addTableModelListener(e);
+        dashboardView.dtmTablePreviewADInfo.addTableModelListener(e);
+        dashboardView.dtmTablePreviewNormalInfo.addTableModelListener(e);
+        dashboardView.dtmtableAdminSales.addTableModelListener(e);
+    }
+
+    private void addItemListener(ItemListener e) {
+        dashboardView.cbEditProfileCountry.addItemListener(e);
     }
 
 
@@ -60,6 +76,10 @@ public class DashboardController implements ActionListener, ListSelectionListene
         tableHistory.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tableHistory.addListSelectionListener(e);
 
+        dashboardView.tablePreviewADInfo.setCellSelectionEnabled(true);
+        ListSelectionModel tablePreviewADInfo = dashboardView.tablePreviewADInfo.getSelectionModel();
+        tablePreviewADInfo.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tablePreviewADInfo.addListSelectionListener(e);
     }
 
     private void addActionListener(ActionListener e) {
@@ -74,6 +94,15 @@ public class DashboardController implements ActionListener, ListSelectionListene
         dashboardView.btnHomeProfile.addActionListener(e);
 
         dashboardView.btnHomePreviewBack.addActionListener(e);
+        dashboardView.btnGeneralViewInfo.addActionListener(e);
+        dashboardView.btnAddressViewInfo.addActionListener(e);
+        dashboardView.btnPreviewADBack.addActionListener(e);
+        dashboardView.btnPreviewNormalBack.addActionListener(e);
+        dashboardView.btnPreviewADHome.addActionListener(e);
+        dashboardView.btnPreviewNormalHome.addActionListener(e);
+        dashboardView.btnPreviewADDelete.addActionListener(e);
+        dashboardView.btnPreviewNormalDelete.addActionListener(e);
+        dashboardView.btnPreviewADForm.addActionListener(e);
 
         dashboardView.btnBagsToHome.addActionListener(e);
         dashboardView.btnBagsBuy.addActionListener(e);
@@ -110,6 +139,8 @@ public class DashboardController implements ActionListener, ListSelectionListene
             case "btnHome":
             case "btnProfileHome":
             case "btnBagsToHome":
+            case "btnPreviewADHome":
+            case "btnPreviewNormalHome":
                 showHome();
                 break;
             case "btnHistory":
@@ -122,6 +153,19 @@ public class DashboardController implements ActionListener, ListSelectionListene
                 break;
             case "btnProfile":
             case "btnEditProfileBack":
+            case "btnEditProfileAddressBack":
+            case "btnPreviewADBack":
+            case "btnPreviewNormalBack":
+
+                cleanEditProfileAddressClean();
+                cleanEditProfile();
+
+                reloadAddressTable();
+                reloadUserInfo();
+
+                initHomeUser();
+                initNormalInfoUser();
+
                 Utilities.displayCard((CardLayout) dashboardView.JPanelCard.getLayout(), dashboardView.JPanelCard, "userViewProfile");
                 break;
             case "btnEditProfileSave":
@@ -131,16 +175,29 @@ public class DashboardController implements ActionListener, ListSelectionListene
                 editProfileAddressInfo();
                 break;
             case "btnSelling":
-                Utilities.displayCard((CardLayout) dashboardView.JPanelCard.getLayout(), dashboardView.JPanelCard, "adminSales");
+
+                cleanCurrentProduct((CardLayout) dashboardView.JPanelCard.getLayout(), dashboardView.JPanelCard, "adminAddProduct");
+
+                if (currentProduct == null) {
+                    Utilities.displayCard((CardLayout) dashboardView.JPanelCard.getLayout(), dashboardView.JPanelCard, "adminSales");
+                    reloadTableSales();
+                }
+
                 break;
             case "btnAddProduct":
             case "btnHomeAdminNewProduct":
                 Utilities.displayCard((CardLayout) dashboardView.JPanelCard.getLayout(), dashboardView.JPanelCard, "adminAddProduct");
                 break;
             case "btnConfig":
-                Utilities.displayCard((CardLayout) dashboardView.JPanelCard.getLayout(), dashboardView.JPanelCard, "adminConfig");
+
+                cleanCurrentProduct((CardLayout) dashboardView.JPanelCard.getLayout(), dashboardView.JPanelCard, "adminAddProduct");
+
+                if (currentProduct == null) {
+                    Utilities.displayCard((CardLayout) dashboardView.JPanelCard.getLayout(), dashboardView.JPanelCard, "adminConfig");
+                }
                 break;
             case "btnProfileEdit":
+            case "btnPreviewADForm":
                 Utilities.displayCard((CardLayout) dashboardView.JPanelCard.getLayout(), dashboardView.JPanelCard, "userEditProfile");
                 break;
             case "btnEditProfileClean":
@@ -182,7 +239,42 @@ public class DashboardController implements ActionListener, ListSelectionListene
             case "btnHomeAdminDelete":
                 deleteProduct();
                 break;
+            case "btnGeneralViewInfo":
+                Utilities.displayCard((CardLayout) dashboardView.JPanelCard.getLayout(), dashboardView.JPanelCard, "PreviewPersonalInfo");
+                reloadUserInfo();
+                break;
+            case "btnAddressViewInfo":
+                Utilities.displayCard((CardLayout) dashboardView.JPanelCard.getLayout(), dashboardView.JPanelCard, "PreviewAddressInfo");
+                reloadAddressTable();
+                break;
+            case "btnPreviewNormalDelete":
+                deleteUser();
+                System.out.println("Borro Perfil Usuario");
+                reloadUserInfo();
+                break;
+            case "btnPreviewADDelete":
+                deleteAddress();
+                System.out.println("Borro Datos Direccion");
+                reloadAddressTable();
+                break;
         }
+    }
+
+    private void deleteUser() {
+
+        User user = model.findUserById(SessionService.getCurrentUser().getId());
+
+        if (user != null) {
+            int res = Utilities.confirmMessage("Are you sure that you want to delete your Account?", "Warning");
+            if (res == JOptionPane.OK_OPTION) {
+                model.deleteUser(user);
+                SessionService.logout();
+                dashboardView.dispose();
+                new LoginController(new LoginView(), model);
+            }
+        }
+
+
     }
 
     //INFO GLOBAL
@@ -203,14 +295,24 @@ public class DashboardController implements ActionListener, ListSelectionListene
                 Utilities.manageBtn(dashboardView.btnConfig, false);
                 reloadProductsUserActive();
                 reloadHistoryUser();
+                reloadAddressTable();
+                reloadUserInfo();
                 initHomeUser();
+                initNormalInfoUser();
+                reloadTableSales();
                 break;
             case "ADMIN":
-                Utilities.displayCard(cl, dashboardView.JPanelCard, "adminHomeAdmin");
+
+                cleanCurrentProduct(cl, dashboardView.JPanelCard, "adminAddProduct");
+
+                if (currentProduct == null) {
+                    Utilities.displayCard(cl, dashboardView.JPanelCard, "adminHomeAdmin");
+                    initFormAddProduct();
+                }
+
                 Utilities.manageBtn(dashboardView.btnHistory, false);
                 Utilities.manageBtn(dashboardView.btnBags, false);
                 Utilities.manageBtn(dashboardView.btnProfile, false);
-                initFormAddProduct();
                 reloadProductsActive();
                 break;
             default:
@@ -219,9 +321,23 @@ public class DashboardController implements ActionListener, ListSelectionListene
         }
     }
 
+    private void cleanCurrentProduct(CardLayout cardLayout, JPanel jPanel, String nameCard) {
+
+
+        if (currentProduct != null) {
+            int res = Utilities.confirmMessage("You're updating a product right now, Are you sure you want to go home?", "Warning");
+            if (res == JOptionPane.OK_OPTION) {
+                cleanFormProduct();
+            } else {
+                Utilities.displayCard(cardLayout, jPanel, nameCard);
+            }
+        }
+
+    }
+
 
     private void reloadProductsActive() {
-        dashboardView.dtmTableProducts.removeTableModelListener(this);
+//        dashboardView.dtmTableProducts.removeTableModelListener(this);
         List<Product> products = model.getAllProductActive();
 
         String[] comlums = {"ID", "Code", "Price", "Material", "Type", "Registered", "Size", "Brand", "waterproof", "Weight", "Gadget", "Security", "Wheels, status"};
@@ -229,29 +345,30 @@ public class DashboardController implements ActionListener, ListSelectionListene
         dashboardView.dtmTableProducts.setColumnIdentifiers(comlums);
 
         for (Product product : products) {
-                dashboardView.dtmTableProducts.addRow(new Object[]{
-                        product.getIdProduct(),
-                        product.getCode(),
-                        product.getPrice(),
-                        product.getMaterial(),
-                        product.getTypeProduct(),
-                        product.getRegisterDay(),
-                        product.getSize(),
-                        product.getBrand(),
-                        product.isWaterproof(),
-                        product.getWeight(),
-                        product.getGadget(),
-                        product.getSecurity(),
-                        product.isWheels(),
-                        product.getStatus()
-                });
+            dashboardView.dtmTableProducts.addRow(new Object[]{
+                    product.getIdProduct(),
+                    product.getCode(),
+                    product.getPrice(),
+                    product.getMaterial(),
+                    product.getTypeProduct(),
+                    product.getRegisterDay(),
+                    product.getSize(),
+                    product.getBrand(),
+                    product.isWaterproof(),
+                    product.getWeight(),
+                    product.getGadget(),
+                    product.getSecurity(),
+                    product.isWheels(),
+                    product.getStatus()
+            });
+
+            centerTable(dashboardView.tableAdminProducts);
         }
     }
 
 
-
     private void reloadProductsUserActive() {
-        dashboardView.dtmTableHome.removeTableModelListener(this);
+//        dashboardView.dtmTableHome.removeTableModelListener(this);
 
         List<Product> products = model.getAllProductActive();
 
@@ -260,30 +377,35 @@ public class DashboardController implements ActionListener, ListSelectionListene
         dashboardView.dtmTableHome.setColumnIdentifiers(comlums);
 
         for (Product product : products) {
-                dashboardView.dtmTableHome.addRow(new Object[]{
-                        product.getIdProduct(),
-                        product.getCode(),
-                        product.getPrice(),
-                        product.getMaterial(),
-                        product.getTypeProduct(),
-                        product.getSize(),
-                        product.getBrand(),
-                        product.isWaterproof(),
-                        product.getWeight(),
-                        product.getGadget(),
-                        product.getSecurity(),
-                        product.isWheels()
-                });
+            dashboardView.dtmTableHome.addRow(new Object[]{
+                    product.getIdProduct(),
+                    product.getCode(),
+                    product.getPrice(),
+                    product.getMaterial(),
+                    product.getTypeProduct(),
+                    product.getSize(),
+                    product.getBrand(),
+                    product.isWaterproof(),
+                    product.getWeight(),
+                    product.getGadget(),
+                    product.getSecurity(),
+                    product.isWheels()
+            });
         }
+        centerTable(dashboardView.tableHome);
     }
 
     private void reloadHistoryUser() {
-        dashboardView.dtmTableHistory.removeTableModelListener(this);
+//        dashboardView.dtmTableHistory.removeTableModelListener(this);
 
         List<Orders> orders = model.findAllOrdersByUser(SessionService.getCurrentUser());
         int lastIndex = orders.size() - 1;
-        lastOrder = orders.get(lastIndex);
-        String[] comlums = {"ID","Type","Material","Brand","Code","Price"};
+
+        if (lastIndex != -1) {
+            lastOrder = orders.get(lastIndex);
+        }
+
+        String[] comlums = {"ID", "Type", "Material", "Brand", "Code", "Price"};
         dashboardView.dtmTableHistory.setRowCount(0);
         dashboardView.dtmTableHistory.setColumnIdentifiers(comlums);
 
@@ -298,40 +420,162 @@ public class DashboardController implements ActionListener, ListSelectionListene
 
             });
         }
+
+        centerTable(dashboardView.tableHistory);
+    }
+
+    private void reloadTableSales() {
+//        dashboardView.dtmTableHistory.removeTableModelListener(this);
+
+        List<Orders> orders = model.findAllPaidOrders();
+        System.out.println(orders.size() + " SIZE LIST ORDER");
+        int lastIndex = orders.size() - 1;
+
+        if (lastIndex != -1) {
+            sales = orders.get(lastIndex);
+        }
+
+        String[] comlums = {"ID Order", "User Name", "User Lastname", "User Email", "Addres Country", "Addres City", "Addres Street", "Addres Apartament", "Prod Price", "Prod Type", "Prod Material"};
+        dashboardView.dtmtableAdminSales.setRowCount(0);
+        dashboardView.dtmtableAdminSales.setColumnIdentifiers(comlums);
+
+        for (Orders order : orders) {
+            dashboardView.dtmtableAdminSales.addRow(new Object[]{
+                    order.getIdOrder(),
+                    order.getUser().getName(),
+                    order.getUser().getLastName(),
+                    order.getUser().getEmail(),
+                    order.getUser().getAddress().getCountry(),
+                    order.getUser().getAddress().getCity(),
+                    order.getUser().getAddress().getStreet(),
+                    order.getUser().getAddress().getApartarment(),
+                    order.getProduct().getCode(),
+                    order.getProduct().getPrice(),
+                    order.getProduct().getTypeProduct(),
+                    order.getProduct().getMaterial()
+            });
+        }
+
+        centerTable(dashboardView.tableAdminSales);
+    }
+
+
+    private void reloadUserInfo() {
+
+        User user = SessionService.getCurrentUser();
+
+        if (user == null) {
+            return;
+        }
+
+        String[] comlums = {"iduser", "name", "lastname", "username", "email", "birthday", "balance"};
+        dashboardView.dtmTablePreviewNormalInfo.setRowCount(0);
+        dashboardView.dtmTablePreviewNormalInfo.setColumnIdentifiers(comlums);
+
+        dashboardView.dtmTablePreviewNormalInfo.addRow(new Object[]{
+                user.getId(),
+                user.getName(),
+                user.getLastName(),
+                user.getUserName(),
+                user.getEmail(),
+                user.getBirthday(),
+                user.getBalance()
+        });
+
+
+        centerTable(dashboardView.tablePreviewNormalInfo);
+    }
+
+    private void reloadAddressTable() {
+//        dashboardView.dtmTablePreviewADInfo.removeTableModelListener(this);
+
+        System.out.println("Cargando tabla Address");
+
+        Address address = model.findAddresByUserId(SessionService.getCurrentUser());
+        User currectUser = SessionService.getCurrentUser();
+        currectUser.setAddress(address);
+
+        String[] comlums = {"ID", "Country", "City", "Street", "Apartarment"};
+        dashboardView.dtmTablePreviewADInfo.setRowCount(0);
+        dashboardView.dtmTablePreviewADInfo.setColumnIdentifiers(comlums);
+
+        if (currectUser.getAddress() != null) {
+            dashboardView.dtmTablePreviewADInfo.addRow(new Object[]{
+                    currectUser.getAddress().getIdAddress(),
+                    currectUser.getAddress().getCountry(),
+                    currectUser.getAddress().getCity(),
+                    currectUser.getAddress().getStreet(),
+                    currectUser.getAddress().getApartarment()
+            });
+        }
+        centerTable(dashboardView.tablePreviewADInfo);
     }
 
     //NORMAL USER
 
+    private void initNormalInfoUser() {
+        User user = model.findUserById(SessionService.getCurrentUser().getId());
+        dashboardView.txtProfileName.setText(user.getName());
+        dashboardView.txtProfileEmail.setText(user.getEmail());
+        dashboardView.txtProfileLastName.setText(user.getLastName());
+        dashboardView.txtProfileUsername.setText(user.getUserName());
+        dashboardView.dpProfileUsername.setDate(user.getBirthday());
+    }
+
     private void initHomeUser() {
 
-        dashboardView.lblHomeCountry.setText(SessionService.getCurrentUser().getCountry());
-        dashboardView.lblHomeStreet.setText(SessionService.getCurrentUser().getStreet());
-        dashboardView.lblHomeCity.setText(SessionService.getCurrentUser().getCity());
-        dashboardView.lblHomeNumberApartament.setText(SessionService.getCurrentUser().getApartament());
+        Address address = model.findAddresByUserId(SessionService.getCurrentUser());
+        User user = model.findUserById(SessionService.getCurrentUser().getId());
 
 
-        dashboardView.txtProfileCountry.setText(SessionService.getCurrentUser().getCountry());
-        dashboardView.txtProfileCity.setText(SessionService.getCurrentUser().getCity());
-        dashboardView.txtProfileStreet.setText(SessionService.getCurrentUser().getStreet());
-        dashboardView.txtProfileApartament.setText(SessionService.getCurrentUser().getApartament());
+        if (address == null) {
+            System.out.println("User Addres es null");
+            dashboardView.lblHomeCountry.setText("UNDEFINED");
+            dashboardView.lblHomeStreet.setText("UNDEFINED");
+            dashboardView.lblHomeCity.setText("UNDEFINED");
+            dashboardView.lblHomeNumberApartament.setText("UNDEFINED");
+
+            dashboardView.txtProfileCountry.setText("UNDEFINED");
+            dashboardView.txtProfileCity.setText("UNDEFINED");
+            dashboardView.txtProfileStreet.setText("UNDEFINED");
+            dashboardView.txtProfileApartament.setText("UNDEFINED");
+        } else {
+            user.setAddress(address);
+            System.out.println("User Addres no es null");
+            String country = user.getAddress().getCountry();
+            String street = user.getAddress().getStreet();
+            String city = user.getAddress().getCity();
+            String apartament = user.getAddress().getApartarment();
+
+            dashboardView.lblHomeCountry.setText(country);
+            dashboardView.lblHomeStreet.setText(street);
+            dashboardView.lblHomeCity.setText(city);
+            dashboardView.lblHomeNumberApartament.setText(apartament);
+
+            dashboardView.txtProfileCountry.setText(country);
+            dashboardView.txtProfileCity.setText(city);
+            dashboardView.txtProfileStreet.setText(street);
+            dashboardView.txtProfileApartament.setText(apartament);
+        }
 
 
-        dashboardView.txtProfileName.setText(SessionService.getCurrentUser().getName());
-        dashboardView.txtProfileEmail.setText(SessionService.getCurrentUser().getEmail());
-        dashboardView.txtProfileLastName.setText(SessionService.getCurrentUser().getLastName());
-        dashboardView.txtProfileUsername.setText(SessionService.getCurrentUser().getUserName());
-        dashboardView.dpProfileUsername.setDate(SessionService.getCurrentUser().getBirthday());
-
-        dashboardView.lblHomeTypoProduct.setText(lastOrder.getProduct().getTypeProduct());
-        dashboardView.lblHomeBrand.setText(lastOrder.getProduct().getBrand());
-        dashboardView.lblHomeMaterial.setText(lastOrder.getProduct().getMaterial());
-        dashboardView.lblHomeCodeBag.setText(lastOrder.getProduct().getCode());
+        if (lastOrder == null || lastOrder.getProduct() == null) {
+            dashboardView.lblHomeTypoProduct.setText("UNDEFINED");
+            dashboardView.lblHomeBrand.setText("UNDEFINED");
+            dashboardView.lblHomeMaterial.setText("UNDEFINED");
+            dashboardView.lblHomeCodeBag.setText("UNDEFINED");
+        } else {
+            dashboardView.lblHomeTypoProduct.setText(lastOrder.getProduct().getTypeProduct());
+            dashboardView.lblHomeBrand.setText(lastOrder.getProduct().getBrand());
+            dashboardView.lblHomeMaterial.setText(lastOrder.getProduct().getMaterial());
+            dashboardView.lblHomeCodeBag.setText(lastOrder.getProduct().getCode());
+        }
     }
 
     private void editProfileInfo() {
 
         String nameUser = dashboardView.txtEditProfileName.getText();
-        String lastNameUser = dashboardView.txtProfileLastName.getText();
+        String lastNameUser = dashboardView.txtEditProfileLastName.getText();
         String userUsername = dashboardView.txtEditProfileUsername.getText();
         String passwordUser = new String(dashboardView.txtEditProfilePassword.getPassword());
         String passwordConfirmUser = new String(dashboardView.txtEditProfileConfirmPassword.getPassword());
@@ -382,36 +626,54 @@ public class DashboardController implements ActionListener, ListSelectionListene
 
     private void editProfileAddressInfo() {
 
-        String countryUser = dashboardView.txtEditProfileCountry.getText();
-        String cityUser = dashboardView.txtEditProfileCity.getText();
+        Address address = model.findAddresByUserId(SessionService.getCurrentUser());
+        User currectUser = SessionService.getCurrentUser();
+        Object countryUserObject = dashboardView.cbEditProfileCountry.getSelectedItem();
+        Object cityUserObject = dashboardView.cbEditProfileCity.getSelectedItem();
         String streetUser = dashboardView.txtEditProfileStreet.getText();
         String apartamentUser = dashboardView.txtEditProfileApartament.getText();
 
-        if (!checkFormEditAddressUser(countryUser, cityUser, streetUser, apartamentUser)) {
+
+        if (!checkFormEditAddressUser(countryUserObject, cityUserObject, streetUser, apartamentUser)) {
             return;
         }
 
-        SessionService.getCurrentUser().setCountry(countryUser);
-        SessionService.getCurrentUser().setCity(cityUser);
-        SessionService.getCurrentUser().setStreet(streetUser);
-        SessionService.getCurrentUser().setApartament(apartamentUser);
+        String countryUser = countryUserObject.toString();
+        String cityUser = cityUserObject.toString();
 
-        model.updateUser(SessionService.getCurrentUser());
+        System.out.println("Saving address: " + countryUser + ", " + cityUser + ", " + streetUser + ", " + apartamentUser);
+
+
+        if (address != null) {
+
+            address.setCountry(countryUser);
+            address.setCity(cityUser);
+            address.setStreet(streetUser);
+            address.setApartarment(apartamentUser);
+            currectUser.setAddress(address);
+            model.updateAddress(currectUser);
+        } else {
+            Address addressNew = new Address(countryUser, cityUser, streetUser, apartamentUser);
+            currectUser.setAddress(addressNew);
+            model.saveAddress(currectUser);
+        }
+
         initHomeUser();
         cleanEditProfileAddressClean();
         Utilities.displayCard((CardLayout) dashboardView.JPanelCard.getLayout(), dashboardView.JPanelCard, "userViewProfile");
     }
 
-    private boolean checkFormEditAddressUser(String countryUser, String cityUser, String streetUser, String apartamentUser) {
 
-        if (countryUser.isEmpty()) {
-            dashboardView.txtEditProfileCountry.requestFocus();
+    private boolean checkFormEditAddressUser(Object countryUser, Object cityUser, String streetUser, String apartamentUser) {
+
+        if (countryUser == null) {
+            dashboardView.cbEditProfileCountry.requestFocus();
             Utilities.showErrorAlert("Please fill the fild Country");
             return false;
         }
 
-        if (cityUser.isEmpty()) {
-            dashboardView.txtEditProfileCity.requestFocus();
+        if (cityUser == null) {
+            dashboardView.cbEditProfileCity.requestFocus();
             Utilities.showErrorAlert("Please fill the fild city");
             return false;
         }
@@ -433,16 +695,18 @@ public class DashboardController implements ActionListener, ListSelectionListene
 
     private void cleanEditProfile() {
         dashboardView.txtEditProfileName.setText("");
-        dashboardView.txtProfileLastName.setText("");
         dashboardView.txtEditProfileUsername.setText("");
         dashboardView.txtEditProfilePassword.setText("");
         dashboardView.txtEditProfileConfirmPassword.setText("");
         dashboardView.dpEditProfileBithday.setDate(LocalDate.now());
+        dashboardView.cbEditProfileCountry.setSelectedIndex(-1);
+        dashboardView.cbEditProfileCity.setSelectedIndex(-1);
     }
 
     private void cleanEditProfileAddressClean() {
-        dashboardView.txtEditProfileCountry.setText("");
-        dashboardView.txtEditProfileCity.setText("");
+        dashboardView.cbEditProfileCountry.setSelectedIndex(-1);
+        dashboardView.cbEditProfileCity.setModel(new DefaultComboBoxModel<>(new String[]{"SELECT FIRST A COUNTRY"}));
+        dashboardView.cbEditProfileCity.setSelectedIndex(-1);
         dashboardView.txtEditProfileStreet.setText("");
         dashboardView.txtEditProfileApartament.setText("");
     }
@@ -646,6 +910,7 @@ public class DashboardController implements ActionListener, ListSelectionListene
     }
 
     private void deleteProduct() {
+
         int row = dashboardView.tableAdminProducts.getSelectedRow();
 
         if (row < 0) {
@@ -662,6 +927,11 @@ public class DashboardController implements ActionListener, ListSelectionListene
     }
 
     private void buyProduct() {
+
+        if (!hasValidAddress()) {
+            Utilities.showErrorAlert("You must create a new Address before buying a product");
+            return;
+        }
 
         int row = dashboardView.tableBags.getSelectedRow();
 
@@ -684,14 +954,41 @@ public class DashboardController implements ActionListener, ListSelectionListene
         reloadProductsUserActive();
     }
 
+    private boolean hasValidAddress() {
+        Address address = SessionService.getCurrentUser().getAddress();
 
-    private void UpdateFromForm() {
-        int row = dashboardView.tableAdminProducts.getSelectedRow();
+        return address != null
+                && address.getCountry() != null
+                && address.getCity() != null
+                && address.getStreet() != null
+                && address.getApartarment() != null;
+    }
+
+
+    private void deleteAddress() {
+        System.out.println("Elimanado Address");
+        int row = dashboardView.tablePreviewADInfo.getSelectedRow();
 
         if (row < 0) {
             Utilities.showErrorAlert("Select a product in the table first.");
             return;
         }
+
+        int idAddres = (int) dashboardView.tablePreviewADInfo.getValueAt(row, 0);
+
+        model.deleteAdddres(idAddres);
+    }
+
+
+    private void UpdateFromForm() {
+
+        int row = dashboardView.tableAdminProducts.getSelectedRow();
+
+        if (row < 0) {
+            Utilities.showErrorAlert("Select a product first");
+            return;
+        }
+
         int idProduct = (int) dashboardView.tableAdminProducts.getValueAt(row, 0);
         String code = String.valueOf(dashboardView.tableAdminProducts.getValueAt(row, 1));
         dashboardView.txtAddCode.setText(code);
@@ -745,6 +1042,7 @@ public class DashboardController implements ActionListener, ListSelectionListene
                 dashboardView.rbAddYesWheels.setSelected(false);
                 currentProduct = new Product(code, priceP, materialS, typeProductS, registerDay, sizeS, brandS, isWateproof, weight, gadgetS, Security.NONE.toString(), false);
                 currentProduct.setIdProduct(idProduct);
+                System.out.println("Update currentProduct is: " + currentProduct);
                 break;
             case SUITCASE:
                 String securityS = String.valueOf(dashboardView.tableAdminProducts.getValueAt(row, 11));
@@ -762,9 +1060,10 @@ public class DashboardController implements ActionListener, ListSelectionListene
 
                 currentProduct = new Product(code, priceP, materialS, typeProductS, registerDay, sizeS, brandS, isWateproof, weight, Gadget.NONE.toString(), securityS, haveWheels);
                 currentProduct.setIdProduct(idProduct);
+                System.out.println("Update currentProduct is: " + currentProduct);
                 break;
         }
-        System.out.println("Update currentProduct is: " + currentProduct);
+
         Utilities.displayCard((CardLayout) dashboardView.JPanelCard.getLayout(), dashboardView.JPanelCard, "adminAddProduct");
     }
 
@@ -859,6 +1158,8 @@ public class DashboardController implements ActionListener, ListSelectionListene
 
     private void cleanFormProduct() {
         currentProduct = null;
+        dashboardView.txtAddCode.setText("");
+        dashboardView.txtAddLastCode.setText("");
         dashboardView.cbAddType.setSelectedIndex(-1);
         dashboardView.dpAddDate.setDate(LocalDate.now());
         dashboardView.spAddPrice.setValue(1);
@@ -915,13 +1216,14 @@ public class DashboardController implements ActionListener, ListSelectionListene
         if (evt.equals(dashboardView.dtmTableProducts)) {
             if (e.getType() == TableModelEvent.UPDATE) {
 
-                System.out.println("actualizada");
 
                 int row = e.getFirstRow();
 
                 if (row < 0) {
                     return;
                 }
+
+                System.out.println("actualizada");
 
                 DefaultTableModel dtm = dashboardView.dtmTableProducts;
 
@@ -962,9 +1264,128 @@ public class DashboardController implements ActionListener, ListSelectionListene
 
             }
         }
+
+        if (evt.equals(dashboardView.dtmTablePreviewADInfo)) {
+            if (e.getType() == TableModelEvent.UPDATE) {
+
+                int row = e.getFirstRow();
+
+                if (row < 0) {
+                    return;
+                }
+
+                System.out.println("Addres desde tabla addres");
+                DefaultTableModel dtm = dashboardView.dtmTablePreviewADInfo;
+
+                int id = Integer.parseInt(dtm.getValueAt(row, 0).toString());
+
+                String country = dtm.getValueAt(row, 1).toString();
+
+                String city = dtm.getValueAt(row, 2).toString();
+
+                String street = dtm.getValueAt(row, 3).toString();
+
+                String apartarment = dtm.getValueAt(row, 4).toString();
+
+                Address address = new Address();
+                address.setCountry(country);
+                address.setCity(city);
+                address.setStreet(street);
+                address.setApartarment(apartarment);
+                User currentUser = SessionService.getCurrentUser();
+                currentUser.setAddress(address);
+                model.updateAddress(currentUser);
+            }
+        }
+
+
+        if (evt.equals(dashboardView.dtmTablePreviewNormalInfo)) {
+            if (e.getType() == TableModelEvent.UPDATE) {
+
+                int row = e.getFirstRow();
+
+                if (row < 0) {
+                    return;
+                }
+                System.out.println("User desde tabla User");
+                DefaultTableModel dtm = dashboardView.dtmTablePreviewNormalInfo;
+
+                String[] comlums = {"iduser", "name", "lastname", "username", "email", "birthday", "balance"};
+
+                int iduser = Integer.parseInt(dtm.getValueAt(row, 0).toString());
+
+                String name = dtm.getValueAt(row, 1).toString();
+
+                String lastname = dtm.getValueAt(row, 2).toString();
+
+                String username = dtm.getValueAt(row, 3).toString();
+
+                String email = dtm.getValueAt(row, 4).toString();
+
+                LocalDate birthday = LocalDate.parse(dtm.getValueAt(row, 5).toString());
+
+                double balance = Double.parseDouble(dtm.getValueAt(row, 6).toString());
+
+                User user = new User();
+                user.setId(iduser);
+                user.setName(name);
+                user.setLastName(lastname);
+                user.setUserName(username);
+                user.setPassword(SessionService.getCurrentUser().getPassword());
+                user.setEmail(email);
+                user.setBirthday(birthday);
+                user.setBalance(balance);
+                model.updateUser(user);
+            }
+        }
+
+    }
+
+    private void validateCity() {
+        Country country = (Country) dashboardView.cbEditProfileCountry.getSelectedItem();
+
+        if (country == null) {
+            dashboardView.cbEditProfileCity.setModel(new DefaultComboBoxModel<>(new String[]{"SELECT FIRST A COUNTRY"}));
+            return;
+        }
+
+        dashboardView.cbEditProfileCity.setEnabled(true);
+        dashboardView.cbEditProfileCity.setModel(new DefaultComboBoxModel<>(Utilities.getCitiesByCountry(country)));
+    }
+
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        Object evt = e.getSource();
+
+        if (evt.equals(dashboardView.cbEditProfileCountry)) {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                validateCity();
+            }
+        }
+    }
+
+    private void centerAllTables() {
+        centerTable(dashboardView.tableAdminProducts);
+        centerTable(dashboardView.tableBags);
+        centerTable(dashboardView.tableHistory);
+        centerTable(dashboardView.tableHome);
+        centerTable(dashboardView.tablePreviewADInfo);
     }
 
 
+    private void centerTable(JTable table) {
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+
+        for (int i = 0; i < table.getColumnCount(); i++) {
+            table.getColumnModel()
+                    .getColumn(i)
+                    .setCellRenderer(centerRenderer);
+        }
+    }
 }
+
+
+
 
 
